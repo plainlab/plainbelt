@@ -52,7 +52,6 @@ export default merge(baseConfig, {
             },
           },
           'css-loader',
-          'sass-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -61,6 +60,7 @@ export default merge(baseConfig, {
               },
             }
           },
+          'sass-loader',
         ],
       },
       // WOFF Font
