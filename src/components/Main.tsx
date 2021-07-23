@@ -6,14 +6,14 @@ import UnixTimestamp from './unix-timestamp/UnixTimestamp';
 const Main = () => {
   const routes = [
     {
+      path: '/unix',
+      name: 'Unix Time Converter',
+      Component: UnixTimestamp,
+    },
+    {
       path: '/md-to-html',
       name: 'Markdown to HTML',
       Component: MarkdownToHtml,
-    },
-    {
-      path: '/unix',
-      name: 'Unix Converter',
-      Component: UnixTimestamp,
     },
   ];
 
@@ -23,7 +23,7 @@ const Main = () => {
         {/* Left sidebar */}
         <nav className="flex flex-col w-1/4 overflow-x-hidden overflow-y-auto bg-gray-200">
           <div
-            className="px-2 mt-6"
+            className="px-2 my-6"
             role="menu"
             aria-orientation="horizontal"
             aria-labelledby="options-menu"
@@ -42,8 +42,8 @@ const Main = () => {
         </nav>
 
         {/* Main content */}
-        <section className="relative flex flex-col w-full bg-gray-100">
-          <div className="h-full overflow-x-hidden overflow-y-auto">
+        <section className="relative flex flex-col w-full bg-gray-100 text-base">
+          <div className="h-full overflow-x-hidden overflow-y-auto px-6 my-6">
             {routes.map(({ path, Component }) => (
               <Route key={path} exact path={path}>
                 <Component />
