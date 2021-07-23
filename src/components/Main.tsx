@@ -1,19 +1,29 @@
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MarkdownToHtml from './md-to-html/MarkdownToHtml';
 import UnixTimestamp from './unix-timestamp/UnixTimestamp';
+import HtmlPreview from './html-preview/HtmlPreview';
 
 const Main = () => {
   const routes = [
     {
+      icon: <FontAwesomeIcon icon="clock" />,
       path: '/unix',
       name: 'Unix Time Converter',
       Component: UnixTimestamp,
     },
     {
+      icon: <FontAwesomeIcon icon={['fab', 'markdown']} />,
       path: '/md-to-html',
       name: 'Markdown to HTML',
       Component: MarkdownToHtml,
+    },
+    {
+      icon: <FontAwesomeIcon icon={['fab', 'html5']} />,
+      path: '/html-preview',
+      name: 'HTML Preview',
+      Component: HtmlPreview,
     },
   ];
 
@@ -28,13 +38,14 @@ const Main = () => {
             aria-orientation="horizontal"
             aria-labelledby="options-menu"
           >
-            {routes.map(({ path, name }) => (
+            {routes.map(({ path, name, icon }) => (
               <NavLink
                 to={path}
                 key={path}
-                className="block rounded-lg px-3 py-1 mb-1"
+                className="rounded-lg px-3 py-1 mb-1 space-x-1 items-center justify-start flex"
                 activeClassName="bg-blue-400 text-white"
               >
+                <span className="w-6">{icon}</span>
                 {name}
               </NavLink>
             ))}

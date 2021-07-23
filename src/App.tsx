@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Main from './components/Main';
 import './App.global.css';
+import './helpers/fontAwesome';
 
 export default function App() {
   return (
