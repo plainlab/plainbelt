@@ -1,8 +1,8 @@
-PlainBelt
-=========
+[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml)
 
-> A toolbelt for all your plain text
+# PlainBelt
 
+> A toolbelt for your plain text
 
 ## Development setup
 
@@ -11,4 +11,10 @@ yarn
 yarn start
 ```
 
-Enjoy!
+## Build binary
+
+```
+yarn package
+```
+
+Checkout the `release` folder and enjoy!
