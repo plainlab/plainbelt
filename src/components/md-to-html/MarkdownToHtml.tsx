@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { useState } from 'react';
 import marked from 'marked';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, clipboard } from 'electron';
 
 const Md2Html = () => {
   const [md, setMd] = useState('# Hello\n> This is a quote');
@@ -21,6 +21,10 @@ const Md2Html = () => {
     setOpening(false);
   };
 
+  const handleCopy = () => {
+    clipboard.write({ text: marked(md) });
+  };
+
   return (
     <div className="min-h-full flex flex-col">
       <div className="flex justify-between mb-1">
@@ -32,13 +36,18 @@ const Md2Html = () => {
         >
           Open...
         </button>
-        <button
-          type="button"
-          className="btn"
-          onClick={() => setPreview(!preview)}
-        >
-          {preview ? 'Raw HTML' : 'Preview'}
-        </button>
+        <span className="flex space-x-2">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => setPreview(!preview)}
+          >
+            {preview ? 'Raw HTML' : 'Preview'}
+          </button>
+          <button type="button" className="btn" onClick={handleCopy}>
+            Copy
+          </button>
+        </span>
       </div>
       <div className="flex min-h-full flex-1">
         <textarea
@@ -50,7 +59,7 @@ const Md2Html = () => {
         <div className="mx-1" />
         {preview ? (
           <section
-            className="flex-1 min-h-full bg-blue-50 p-4 prose rounded-md"
+            className="flex-1 min-h-full bg-blue-50 p-4 prose w-full rounded-md"
             dangerouslySetInnerHTML={{ __html: marked(md) }}
           />
         ) : (
