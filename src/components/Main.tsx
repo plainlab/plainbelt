@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MarkdownToHtml from './md-to-html/MarkdownToHtml';
 import UnixTimestamp from './unix-timestamp/UnixTimestamp';
 import HtmlPreview from './html-preview/HtmlPreview';
+import QrCode from './qrcode/QrCode';
 
 const Main = () => {
   const routes = [
@@ -24,6 +25,12 @@ const Main = () => {
       path: '/html-preview',
       name: 'HTML Preview',
       Component: HtmlPreview,
+    },
+    {
+      icon: <FontAwesomeIcon icon="qrcode" />,
+      path: '/qrcode-generator',
+      name: 'QRCode generator',
+      Component: QrCode,
     },
   ];
 

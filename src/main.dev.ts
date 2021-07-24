@@ -16,6 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { FileFilter, IpcMainInvokeEvent } from 'electron/main';
 import fs from 'fs';
+import QRCode from 'qrcode';
 import { promisify } from 'util';
 import MenuBuilder from './menu';
 
@@ -131,6 +132,26 @@ ipcMain.handle(
       content = buffer.toString();
     }
     return content;
+  }
+);
+
+ipcMain.handle(
+  'generate-qrcode',
+  async (_event: IpcMainInvokeEvent, { content }) => {
+    return QRCode.toDataURL(content, { width: 1024 });
+  }
+);
+
+ipcMain.handle(
+  'save-file',
+  async (_event: IpcMainInvokeEvent, { defaultPath, content }) => {
+    const file = await dialog.showSaveDialog({
+      defaultPath,
+    });
+
+    if (!file || !file.filePath) return;
+
+    await promisify(fs.writeFile)(file.filePath, content);
   }
 );
 
