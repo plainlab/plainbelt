@@ -5,6 +5,12 @@ module.exports = {
   purge: {
     content: ['./src/**/*.{ts,tsx,html}'],
   },
-  variants: {},
+  variants: {
+    extend: {
+      backgroundColor: ['active'],
+      textColor: ['active'],
+      opacity: ['disabled'],
+    },
+  },
   plugins: [typography],
 };

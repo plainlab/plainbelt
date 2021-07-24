@@ -11,9 +11,12 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import { FileFilter, IpcMainInvokeEvent } from 'electron/main';
+import fs from 'fs';
+import { promisify } from 'util';
 import MenuBuilder from './menu';
 
 export default class AppUpdater {
@@ -112,9 +115,28 @@ const createWindow = async () => {
 };
 
 /**
+ * Handlers events from React
+ */
+ipcMain.handle(
+  'open-file',
+  async (_event: IpcMainInvokeEvent, filters: FileFilter[]) => {
+    const files = await dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters,
+    });
+
+    let content = '';
+    if (files) {
+      const buffer = await promisify(fs.readFile)(files.filePaths[0]);
+      content = buffer.toString();
+    }
+    return content;
+  }
+);
+
+/**
  * Add event listeners...
  */
-
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed

@@ -53,7 +53,7 @@ const Main = () => {
         </nav>
 
         {/* Main content */}
-        <section className="relative flex flex-col w-full bg-gray-100 text-base">
+        <section className="relative flex flex-col w-full bg-gray-100">
           <div className="h-full overflow-x-hidden overflow-y-auto px-6 my-6">
             {routes.map(({ path, Component }) => (
               <Route key={path} exact path={path}>
