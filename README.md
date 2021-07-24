@@ -1,4 +1,4 @@
-[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml)
+[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/plainbelt/plainbelt)
 
 # PlainBelt
 
@@ -16,7 +16,7 @@
 
 ## Installation
 
-Download binary file for your system in releases page https://github.com/plainbelt/plainbelt/releases.
+Download binary file for your system on the releases page: https://github.com/plainbelt/plainbelt/releases.
 
 ## Development setup
 
