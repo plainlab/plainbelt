@@ -29,7 +29,7 @@ const Main = () => {
     {
       icon: <FontAwesomeIcon icon="qrcode" />,
       path: '/qrcode-generator',
-      name: 'QRCode generator',
+      name: 'QRCode Generator',
       Component: QrCode,
     },
   ];

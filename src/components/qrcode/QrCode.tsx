@@ -67,11 +67,9 @@ const HtmlPreview = () => {
           value={content}
         />
         <div className="mx-1" />
-        {qrCode && (
-          <section className="flex-1 min-h-full flex items-center p-4 prose bg-white rounded-md">
-            <img src={qrCode} alt={content} />
-          </section>
-        )}
+        <section className="flex-1 min-h-full flex items-center p-4 prose bg-white rounded-md">
+          {qrCode && <img src={qrCode} alt={content} />}
+        </section>
       </div>
     </div>
   );
