@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useDebouncedEffect } from '../../helpers/effectHooks';
 
 const HtmlPreview = () => {
   const [content, setContent] = useState('https://plainbelt.github.io');
@@ -7,17 +8,19 @@ const HtmlPreview = () => {
   const [opening, setOpening] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    ipcRenderer
-      .invoke('generate-qrcode', { content })
-      .then((qr) => setQrCode(qr))
-      .catch(() => {});
-  });
+  useDebouncedEffect(
+    () => {
+      ipcRenderer
+        .invoke('generate-qrcode', { content })
+        .then((qr) => setQrCode(qr))
+        .catch(() => {});
+    },
+    [content],
+    500
+  );
 
   const handleChange = async (evt: { target: { value: string } }) => {
     setContent(evt.target.value);
-    const qr = await ipcRenderer.invoke('generate-qrcode', { content });
-    setQrCode(qr);
   };
 
   const handleOpen = async () => {
@@ -57,16 +60,16 @@ const HtmlPreview = () => {
           Save...
         </button>
       </div>
-      <div className="flex min-h-full">
+      <div className="flex flex-1 min-h-full">
         <textarea
           onChange={handleChange}
-          className="flex-1 min-h-full bg-white p-4"
+          className="flex-1 min-h-full bg-white p-4 rounded-md"
           value={content}
         />
         <div className="mx-1" />
         {qrCode && (
-          <section className="flex-1 min-h-full flex items-center p-4 prose bg-white">
-            <img src={qrCode} alt={content} className="w-full h-full" />
+          <section className="flex-1 min-h-full flex items-center p-4 prose bg-white rounded-md">
+            <img src={qrCode} alt={content} />
           </section>
         )}
       </div>

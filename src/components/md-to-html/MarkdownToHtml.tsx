@@ -5,7 +5,7 @@ import { ipcRenderer } from 'electron';
 
 const Md2Html = () => {
   const [md, setMd] = useState('# Hello\n> This is a quote');
-  const [preview, setPreview] = useState(false);
+  const [preview, setPreview] = useState(true);
   const [opening, setOpening] = useState(false);
 
   const handleChange = (evt: { target: { value: string } }) =>
