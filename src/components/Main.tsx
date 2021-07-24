@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Helmet } from 'react-helmet';
+
 import MarkdownToHtml from './markdown/MarkdownToHtml';
 import UnixTimestamp from './timestamp/UnixTimestamp';
 import HtmlPreview from './html/HtmlPreview';
@@ -83,9 +85,12 @@ const Main = () => {
         {/* Main content */}
         <section className="relative flex flex-col w-full bg-gray-200">
           <div className="h-full overflow-x-hidden overflow-y-auto px-6 my-6">
-            {routes.map(({ path, Component }) => (
+            {routes.map(({ path, name, Component }) => (
               <Route key={path} exact path={path}>
                 <Component />
+                <Helmet>
+                  <title>{name}</title>
+                </Helmet>
               </Route>
             ))}
           </div>
