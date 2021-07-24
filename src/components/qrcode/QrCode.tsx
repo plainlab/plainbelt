@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron';
+import { clipboard, ipcRenderer } from 'electron';
 import React, { useState } from 'react';
 import { useDebouncedEffect } from '../../helpers/effectHooks';
 
@@ -40,17 +40,27 @@ const HtmlPreview = () => {
     setSaving(false);
   };
 
+  const handleClipboard = () => {
+    setContent(clipboard.readText());
+  };
+
   return (
     <div className="min-h-full flex flex-col">
       <div className="flex justify-between mb-1">
-        <button
-          type="button"
-          className="btn"
-          onClick={handleOpen}
-          disabled={opening}
-        >
-          Open...
-        </button>
+        <span className="flex space-x-2">
+          <button type="button" className="btn" onClick={handleClipboard}>
+            Clipboard
+          </button>
+          <button
+            type="button"
+            className="btn"
+            onClick={handleOpen}
+            disabled={opening}
+          >
+            Open...
+          </button>
+        </span>
+
         <button
           type="button"
           className="btn"

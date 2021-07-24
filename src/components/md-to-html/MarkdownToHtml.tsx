@@ -21,6 +21,10 @@ const Md2Html = () => {
     setOpening(false);
   };
 
+  const handleClipboard = () => {
+    setMd(clipboard.readText());
+  };
+
   const handleCopy = () => {
     clipboard.write({ text: marked(md) });
   };
@@ -28,14 +32,19 @@ const Md2Html = () => {
   return (
     <div className="min-h-full flex flex-col">
       <div className="flex justify-between mb-1">
-        <button
-          type="button"
-          className="btn"
-          onClick={handleOpen}
-          disabled={opening}
-        >
-          Open...
-        </button>
+        <span className="flex space-x-2">
+          <button type="button" className="btn" onClick={handleClipboard}>
+            Clipboard
+          </button>
+          <button
+            type="button"
+            className="btn"
+            onClick={handleOpen}
+            disabled={opening}
+          >
+            Open...
+          </button>
+        </span>
         <span className="flex space-x-2">
           <button
             type="button"

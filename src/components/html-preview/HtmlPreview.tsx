@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { ipcRenderer } from 'electron';
+import { clipboard, ipcRenderer } from 'electron';
 import React, { useState } from 'react';
 
 const HtmlPreview = () => {
@@ -19,9 +19,16 @@ const HtmlPreview = () => {
     setOpening(false);
   };
 
+  const handleClipboard = () => {
+    setHtml(clipboard.readText());
+  };
+
   return (
     <div className="min-h-full flex flex-col">
-      <div className="flex justify-start mb-1">
+      <div className="flex justify-start mb-1 space-x-2">
+        <button type="button" className="btn" onClick={handleClipboard}>
+          Clipboard
+        </button>
         <button
           type="button"
           className="btn"
