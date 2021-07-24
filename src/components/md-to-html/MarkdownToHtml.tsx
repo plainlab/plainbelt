@@ -7,6 +7,7 @@ const Md2Html = () => {
   const [md, setMd] = useState('# Hello\n> This is a quote');
   const [preview, setPreview] = useState(true);
   const [opening, setOpening] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (evt: { target: { value: string } }) =>
     setMd(evt.target.value);
@@ -26,7 +27,9 @@ const Md2Html = () => {
   };
 
   const handleCopy = () => {
+    setCopied(true);
     clipboard.write({ text: marked(md) });
+    setTimeout(() => setCopied(false), 500);
   };
 
   return (
@@ -53,8 +56,13 @@ const Md2Html = () => {
           >
             {preview ? 'Raw HTML' : 'Preview'}
           </button>
-          <button type="button" className="btn" onClick={handleCopy}>
-            Copy
+          <button
+            type="button"
+            className="btn"
+            onClick={handleCopy}
+            disabled={copied}
+          >
+            {copied ? 'Copied' : 'Copy'}
           </button>
         </span>
       </div>

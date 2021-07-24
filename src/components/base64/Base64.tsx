@@ -7,6 +7,7 @@ const Base64 = () => {
   const [string, setString] = useState(true);
   const [output, setOutput] = useState(btoa('Raw data'));
   const [opening, setOpening] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleChangeInput = (evt: { target: { value: string } }) =>
     setInput(evt.target.value);
@@ -27,7 +28,9 @@ const Base64 = () => {
   };
 
   const handleCopyOutput = () => {
+    setCopied(true);
     clipboard.write({ text: output });
+    setTimeout(() => setCopied(false), 500);
   };
 
   useEffect(() => {
@@ -57,8 +60,8 @@ const Base64 = () => {
           >
             Open...
           </button>
-          <div className="flex space-x-4 items-center">
-            <label htmlFor="string" className="flex items-center space-x-2">
+          <div className="flex space-x-2 items-center">
+            <label htmlFor="string" className="flex items-center space-x-1">
               <input
                 type="radio"
                 className="btn"
@@ -69,7 +72,7 @@ const Base64 = () => {
               />
               <p>Text</p>
             </label>
-            <label htmlFor="raw" className="flex items-center space-x-2">
+            <label htmlFor="raw" className="flex items-center space-x-1">
               <input
                 type="radio"
                 className="btn"
@@ -84,7 +87,7 @@ const Base64 = () => {
         </span>
         <span className="flex space-x-4">
           <div className="flex space-x-4 items-center">
-            <label htmlFor="encoder" className="flex items-center space-x-2">
+            <label htmlFor="encoder" className="flex items-center space-x-1">
               <input
                 type="radio"
                 className="btn"
@@ -95,7 +98,7 @@ const Base64 = () => {
               />
               <p>Encode</p>
             </label>
-            <label htmlFor="decoder" className="flex items-center space-x-2">
+            <label htmlFor="decoder" className="flex items-center space-x-1">
               <input
                 type="radio"
                 className="btn"
@@ -107,8 +110,13 @@ const Base64 = () => {
               <p>Decode</p>
             </label>
           </div>
-          <button type="button" className="btn" onClick={handleCopyOutput}>
-            Copy
+          <button
+            type="button"
+            className="btn"
+            onClick={handleCopyOutput}
+            disabled={copied}
+          >
+            {copied ? 'Copied' : 'Copy'}
           </button>
         </span>
       </div>

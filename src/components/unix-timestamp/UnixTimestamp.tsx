@@ -39,7 +39,7 @@ const UnixTimestampConverter = () => {
   const handleCopy = () => {
     clipboard.write({ text: `${date.unix()}` });
     setCopied(true);
-    setTimeout(() => setCopied(false), 1_000);
+    setTimeout(() => setCopied(false), 500);
   };
 
   const handleChangeEpoch = (evt: { target: { value: string } }) => {
@@ -183,7 +183,7 @@ const UnixTimestampConverter = () => {
           onClick={handleCopy}
           disabled={copied}
         >
-          Copy
+          {copied ? 'Copied' : 'Copy'}
         </button>
       </section>
     </div>
