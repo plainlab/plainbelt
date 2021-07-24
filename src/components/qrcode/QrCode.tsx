@@ -27,7 +27,7 @@ const HtmlPreview = () => {
     setOpening(true);
     const filters = [{ name: 'Text Files', extensions: ['txt'] }];
     const data = await ipcRenderer.invoke('open-file', filters);
-    setContent(data);
+    setContent(Buffer.from(data).toString());
     setOpening(false);
   };
 
@@ -77,7 +77,7 @@ const HtmlPreview = () => {
           value={content}
         />
         <div className="mx-1" />
-        <section className="flex-1 min-h-full flex items-center p-4 prose bg-white rounded-md">
+        <section className="flex-1 min-h-full flex items-center p-4 prose bg-gray-100 rounded-md">
           {qrCode && <img src={qrCode} alt={content} />}
         </section>
       </div>

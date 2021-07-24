@@ -7,6 +7,7 @@ const Md2Html = () => {
   const [md, setMd] = useState('# Hello\n> This is a quote');
   const [preview, setPreview] = useState(true);
   const [opening, setOpening] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (evt: { target: { value: string } }) =>
     setMd(evt.target.value);
@@ -17,7 +18,7 @@ const Md2Html = () => {
       { name: 'Markdown Files', extensions: ['md', 'markdown', 'txt'] },
     ];
     const content = await ipcRenderer.invoke('open-file', filters);
-    setMd(content);
+    setMd(Buffer.from(content).toString());
     setOpening(false);
   };
 
@@ -26,7 +27,9 @@ const Md2Html = () => {
   };
 
   const handleCopy = () => {
+    setCopied(true);
     clipboard.write({ text: marked(md) });
+    setTimeout(() => setCopied(false), 500);
   };
 
   return (
@@ -53,8 +56,13 @@ const Md2Html = () => {
           >
             {preview ? 'Raw HTML' : 'Preview'}
           </button>
-          <button type="button" className="btn" onClick={handleCopy}>
-            Copy
+          <button
+            type="button"
+            className="btn"
+            onClick={handleCopy}
+            disabled={copied}
+          >
+            {copied ? 'Copied' : 'Copy'}
           </button>
         </span>
       </div>
@@ -68,14 +76,14 @@ const Md2Html = () => {
         <div className="mx-1" />
         {preview ? (
           <section
-            className="flex-1 min-h-full bg-blue-50 p-4 prose w-full rounded-md"
+            className="flex-1 min-h-full bg-gray-100 p-4 prose w-full rounded-md"
             dangerouslySetInnerHTML={{ __html: marked(md) }}
           />
         ) : (
           <textarea
-            className="flex-1 min-h-full bg-blue-100 p-4 rounded-md"
+            className="flex-1 min-h-full bg-gray-100 p-4 rounded-md"
             value={marked(md)}
-            disabled
+            readOnly
           />
         )}
       </div>

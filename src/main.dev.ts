@@ -118,6 +118,9 @@ const createWindow = async () => {
 /**
  * Handlers events from React
  */
+
+// This method return a Buffer, if you want to convert to string
+// use Buffer.from(buffer).toString()
 ipcMain.handle(
   'open-file',
   async (_event: IpcMainInvokeEvent, filters: FileFilter[]) => {
@@ -126,10 +129,10 @@ ipcMain.handle(
       filters,
     });
 
-    let content = '';
+    let content;
     if (files) {
       const buffer = await promisify(fs.readFile)(files.filePaths[0]);
-      content = buffer.toString();
+      content = buffer;
     }
     return content;
   }
