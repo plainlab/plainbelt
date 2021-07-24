@@ -4,6 +4,20 @@
 
 > A toolbelt for your plain text
 
+## Features
+
+- [x] Unix Timestamp Converter
+- [x] Markdown to HTML Converter
+- [x] HTML Preview
+- [x] QRCode Generator
+- [x] Base64 Encoder / Decoder
+- [x] Text Diff
+- [x] SQL formatter
+
+## Installation
+
+Download binary file for your system in releases page https://github.com/plainbelt/plainbelt/releases.
+
 ## Development setup
 
 ```
