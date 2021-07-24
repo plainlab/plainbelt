@@ -104,7 +104,7 @@ const UnixTimestampConverter = () => {
         </label>
       </section>
 
-      <section className="flex flex-col space-y-4 w-full p-4 pb-8 rounded-md bg-gray-200 border mb-4">
+      <section className="flex flex-col space-y-4 w-full p-4 pb-8 rounded-md shadow-sm bg-gray-100 border mb-4">
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="local" className="flex-1">
             <span>Local:</span>
@@ -172,9 +172,9 @@ const UnixTimestampConverter = () => {
           </label>
         </section>
       </section>
-      <section className="mt-4 pt-4 space-y-1 flex items-center border-t space-x-2 pb-4">
+      <section className="pt-4 space-y-1 flex items-center space-x-2 pb-4">
         <p>The current Unix epoch time is</p>
-        <span className="bg-blue-200 px-2 py-0.5 rounded font-mono">
+        <span className="bg-gray-100 border shadow-sm px-2 py-0.5 rounded-md font-mono">
           {date.unix()}
         </span>
         <button

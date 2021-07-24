@@ -47,7 +47,7 @@ const HtmlPreview = () => {
         />
         <div className="mx-1" />
         <section
-          className="flex-1 min-h-full bg-blue-50 p-4 prose rounded-md"
+          className="flex-1 min-h-full bg-gray-100 p-4 prose rounded-md"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
