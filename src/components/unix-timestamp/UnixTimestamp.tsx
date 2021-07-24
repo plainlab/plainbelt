@@ -64,23 +64,7 @@ const UnixTimestampConverter = () => {
 
   return (
     <div className="min-h-full flex flex-col">
-      <section className="mb-4 space-y-1 flex items-center space-x-2 border-b pb-4">
-        <p>The current Unix epoch time is</p>
-        <span className="text-base bg-blue-200 px-2 py-1 rounded font-mono">
-          {date.unix()}
-        </span>
-        <button
-          type="button"
-          className="btn"
-          onClick={handleCopy}
-          disabled={copied}
-        >
-          Copy
-        </button>
-      </section>
-
       <section className="flex justify-start space-x-2 mb-4">
-        <p>Input:</p>
         <button type="button" className="btn" onClick={handleClipboard}>
           Clipboard
         </button>
@@ -120,7 +104,7 @@ const UnixTimestampConverter = () => {
         </label>
       </section>
 
-      <section className="flex flex-col space-y-4 w-full p-4 pb-8 rounded-md bg-gray-200 border">
+      <section className="flex flex-col space-y-4 w-full p-4 pb-8 rounded-md bg-gray-200 border mb-4">
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="local" className="flex-1">
             <span>Local:</span>
@@ -187,6 +171,20 @@ const UnixTimestampConverter = () => {
             />
           </label>
         </section>
+      </section>
+      <section className="mt-4 pt-4 space-y-1 flex items-center border-t space-x-2 pb-4">
+        <p>The current Unix epoch time is</p>
+        <span className="bg-blue-200 px-2 py-0.5 rounded font-mono">
+          {date.unix()}
+        </span>
+        <button
+          type="button"
+          className="btn"
+          onClick={handleCopy}
+          disabled={copied}
+        >
+          Copy
+        </button>
       </section>
     </div>
   );

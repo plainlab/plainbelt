@@ -5,6 +5,7 @@ import MarkdownToHtml from './md-to-html/MarkdownToHtml';
 import UnixTimestamp from './unix-timestamp/UnixTimestamp';
 import HtmlPreview from './html-preview/HtmlPreview';
 import QrCode from './qrcode/QrCode';
+import Base64 from './base64/Base64';
 
 const Main = () => {
   const routes = [
@@ -31,6 +32,12 @@ const Main = () => {
       path: '/qrcode-generator',
       name: 'QRCode Generator',
       Component: QrCode,
+    },
+    {
+      icon: <FontAwesomeIcon icon="code" />,
+      path: '/base64',
+      name: 'Base64 Encoder',
+      Component: Base64,
     },
   ];
 

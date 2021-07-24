@@ -15,7 +15,7 @@ const HtmlPreview = () => {
     setOpening(true);
     const filters = [{ name: 'HTML Files', extensions: ['htm', 'html'] }];
     const content = await ipcRenderer.invoke('open-file', filters);
-    setHtml(content);
+    setHtml(Buffer.from(content).toString());
     setOpening(false);
   };
 

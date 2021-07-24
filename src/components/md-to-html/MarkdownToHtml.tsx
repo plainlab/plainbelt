@@ -17,7 +17,7 @@ const Md2Html = () => {
       { name: 'Markdown Files', extensions: ['md', 'markdown', 'txt'] },
     ];
     const content = await ipcRenderer.invoke('open-file', filters);
-    setMd(content);
+    setMd(Buffer.from(content).toString());
     setOpening(false);
   };
 

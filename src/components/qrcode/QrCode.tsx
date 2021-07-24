@@ -27,7 +27,7 @@ const HtmlPreview = () => {
     setOpening(true);
     const filters = [{ name: 'Text Files', extensions: ['txt'] }];
     const data = await ipcRenderer.invoke('open-file', filters);
-    setContent(data);
+    setContent(Buffer.from(data).toString());
     setOpening(false);
   };
 
