@@ -4,7 +4,19 @@ import {
   faClock,
   faCode,
   faCopy,
+  faDatabase,
+  faExchangeAlt,
   faQrcode,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fab, faMarkdown, faClock, faHtml5, faQrcode, faCopy, faCode);
+library.add(
+  fab,
+  faMarkdown,
+  faClock,
+  faHtml5,
+  faQrcode,
+  faCopy,
+  faCode,
+  faExchangeAlt,
+  faDatabase
+);

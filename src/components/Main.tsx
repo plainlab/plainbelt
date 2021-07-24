@@ -6,12 +6,13 @@ import UnixTimestamp from './unix-timestamp/UnixTimestamp';
 import HtmlPreview from './html-preview/HtmlPreview';
 import QrCode from './qrcode/QrCode';
 import Base64 from './base64/Base64';
+import DiffText from './diff/TextDiff';
 
 const Main = () => {
   const routes = [
     {
       icon: <FontAwesomeIcon icon="clock" />,
-      path: '/unix',
+      path: '/unix-converter',
       name: 'Unix Time Converter',
       Component: UnixTimestamp,
     },
@@ -35,9 +36,21 @@ const Main = () => {
     },
     {
       icon: <FontAwesomeIcon icon="code" />,
-      path: '/base64',
+      path: '/base64-encoder',
       name: 'Base64 Encoder',
       Component: Base64,
+    },
+    {
+      icon: <FontAwesomeIcon icon="exchange-alt" />,
+      path: '/text-diff',
+      name: 'Text Diff',
+      Component: DiffText,
+    },
+    {
+      icon: <FontAwesomeIcon icon="database" />,
+      path: '/sql-formatter',
+      name: 'SQL Formatter',
+      Component: MarkdownToHtml,
     },
   ];
 
