@@ -38,14 +38,13 @@ const HtmlPreview = () => {
           Open...
         </button>
       </div>
-      <div className="flex flex-1 min-h-full">
+      <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChange}
           className="flex-1 min-h-full bg-white p-4 rounded-md"
           value={html}
           disabled={opening}
         />
-        <div className="mx-1" />
         <section
           className="flex-1 min-h-full bg-gray-100 p-4 prose rounded-md"
           dangerouslySetInnerHTML={{ __html: html }}

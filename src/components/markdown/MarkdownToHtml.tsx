@@ -66,14 +66,13 @@ const Md2Html = () => {
           </button>
         </span>
       </div>
-      <div className="flex min-h-full flex-1">
+      <div className="flex min-h-full flex-1 space-x-2">
         <textarea
           onChange={handleChange}
           className="flex-1 min-h-full bg-white p-4 rounded-md"
           value={md}
           disabled={opening}
         />
-        <div className="mx-1" />
         {preview ? (
           <section
             className="flex-1 min-h-full bg-gray-100 p-4 prose w-full rounded-md"

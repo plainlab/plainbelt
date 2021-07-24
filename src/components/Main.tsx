@@ -1,23 +1,25 @@
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MarkdownToHtml from './md-to-html/MarkdownToHtml';
-import UnixTimestamp from './unix-timestamp/UnixTimestamp';
-import HtmlPreview from './html-preview/HtmlPreview';
-import QrCode from './qrcode/QrCode';
+import MarkdownToHtml from './markdown/MarkdownToHtml';
+import UnixTimestamp from './timestamp/UnixTimestamp';
+import HtmlPreview from './html/HtmlPreview';
+import QrCodeGenerator from './qrcode/QrCodeGenerator';
 import Base64 from './base64/Base64';
+import DiffText from './diff/TextDiff';
+import SqlFormatter from './sql/SqlFormatter';
 
 const Main = () => {
   const routes = [
     {
       icon: <FontAwesomeIcon icon="clock" />,
-      path: '/unix',
+      path: '/unix-converter',
       name: 'Unix Time Converter',
       Component: UnixTimestamp,
     },
     {
       icon: <FontAwesomeIcon icon={['fab', 'markdown']} />,
-      path: '/md-to-html',
+      path: '/markdown-to-html',
       name: 'Markdown to HTML',
       Component: MarkdownToHtml,
     },
@@ -31,13 +33,25 @@ const Main = () => {
       icon: <FontAwesomeIcon icon="qrcode" />,
       path: '/qrcode-generator',
       name: 'QRCode Generator',
-      Component: QrCode,
+      Component: QrCodeGenerator,
     },
     {
       icon: <FontAwesomeIcon icon="code" />,
-      path: '/base64',
+      path: '/base64-encoder',
       name: 'Base64 Encoder',
       Component: Base64,
+    },
+    {
+      icon: <FontAwesomeIcon icon="exchange-alt" />,
+      path: '/text-diff',
+      name: 'Text Diff',
+      Component: DiffText,
+    },
+    {
+      icon: <FontAwesomeIcon icon="database" />,
+      path: '/sql-formatter',
+      name: 'SQL Formatter',
+      Component: SqlFormatter,
     },
   ];
 
