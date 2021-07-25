@@ -11,6 +11,7 @@ import Base64 from './base64/Base64';
 import DiffText from './diff/TextDiff';
 import SqlFormatter from './sql/SqlFormatter';
 import JsonFormatter from './json/JsonFormatter';
+import QRCodeReader from './qrcode/QrCodeReader';
 
 const Main = () => {
   const routes = [
@@ -37,6 +38,12 @@ const Main = () => {
       path: '/qrcode-generator',
       name: 'QRCode Generator',
       Component: QrCodeGenerator,
+    },
+    {
+      icon: <FontAwesomeIcon icon="camera" />,
+      path: '/qrcode-reader',
+      name: 'QRCode Reader',
+      Component: QRCodeReader,
     },
     {
       icon: <FontAwesomeIcon icon="code" />,
