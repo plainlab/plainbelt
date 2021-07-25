@@ -1,4 +1,4 @@
-[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/plainbelt/plainbelt)
+[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainbelt/plainbelt)
 
 # PlainBelt
 
