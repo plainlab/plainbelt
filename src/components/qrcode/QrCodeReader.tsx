@@ -12,8 +12,8 @@ const QRCodeReader = () => {
   const handleOpen = async () => {
     setOpening(true);
     const filters = [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png'] }];
-    const buff = await ipcRenderer.invoke('open-file', filters);
-    setImage(nativeImage.createFromBuffer(buff));
+    const path = await ipcRenderer.invoke('open-file', filters, 'path');
+    setImage(nativeImage.createFromPath(path));
     setOpening(false);
   };
 
