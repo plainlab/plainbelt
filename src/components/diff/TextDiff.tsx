@@ -80,12 +80,12 @@ const TextDiff = () => {
         <div className="flex flex-1 min-h-full space-x-2">
           <textarea
             onChange={handleChangeLeft}
-            className="flex-1 min-h-full p-4 bg-white rounded-md"
+            className="flex-1 min-h-full p-2 bg-white rounded-md"
             value={left}
           />
           <textarea
             onChange={handleChangeRight}
-            className="flex-1 min-h-full p-4 bg-white rounded-md"
+            className="flex-1 min-h-full p-2 bg-white rounded-md"
             value={right}
           />
         </div>
@@ -116,7 +116,7 @@ const TextDiff = () => {
         </div>
 
         <section
-          className="flex-1 w-full min-h-full p-4 bg-gray-100 rounded-md"
+          className="flex-1 w-full min-h-full p-2 bg-gray-100 rounded-md"
           dangerouslySetInnerHTML={{ __html: diff }}
         />
       </section>

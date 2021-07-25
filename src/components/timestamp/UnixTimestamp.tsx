@@ -104,7 +104,7 @@ const UnixTimestampConverter = () => {
         </label>
       </section>
 
-      <section className="flex flex-col w-full p-4 pb-8 mb-4 space-y-4 bg-gray-100 border rounded-md shadow-sm">
+      <section className="flex flex-col w-full p-2 pb-8 mb-4 space-y-4 bg-gray-100 border rounded-md shadow-sm">
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="local" className="flex-1">
             <span>Local:</span>
