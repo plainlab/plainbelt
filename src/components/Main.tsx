@@ -12,6 +12,7 @@ import DiffText from './diff/TextDiff';
 import SqlFormatter from './sql/SqlFormatter';
 import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
+import RegexTester from './regex/RegexTester';
 
 const Main = () => {
   const routes = [
@@ -20,6 +21,12 @@ const Main = () => {
       path: '/unix-converter',
       name: 'Unix Time Converter',
       Component: UnixTimestamp,
+    },
+    {
+      icon: <FontAwesomeIcon icon="registered" />,
+      path: '/regex-tester',
+      name: 'Regex Tester',
+      Component: RegexTester,
     },
     {
       icon: <FontAwesomeIcon icon={['fab', 'markdown']} />,

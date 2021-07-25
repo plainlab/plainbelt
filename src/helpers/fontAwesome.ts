@@ -5,6 +5,7 @@ import {
   faHtml5,
   faJsSquare,
 } from '@fortawesome/free-brands-svg-icons';
+import { faRegistered } from '@fortawesome/free-regular-svg-icons';
 import {
   faCamera,
   faClock,
@@ -26,5 +27,6 @@ library.add(
   faExchangeAlt,
   faDatabase,
   faJsSquare,
+  faRegistered,
   faCamera
 );

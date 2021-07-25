@@ -58,7 +58,7 @@ const Md2Html = () => {
           </button>
           <button
             type="button"
-            className="btn"
+            className="w-16 btn"
             onClick={handleCopy}
             disabled={copied}
           >

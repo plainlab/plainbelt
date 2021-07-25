@@ -15,11 +15,11 @@
 - [x] Text Diff
 - [x] JSON Formatter
 - [x] SQL Formatter
+- [x] Regex Tester
 - [ ] JWT Debugger
 - [ ] Number Base Converter
 - [ ] URL Encode/Decode
 - [ ] HTML Entity Encode/Decode
-- [ ] Regex Tester
 
 ## Installation
 
