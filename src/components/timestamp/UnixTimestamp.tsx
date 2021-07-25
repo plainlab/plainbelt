@@ -88,7 +88,7 @@ const UnixTimestampConverter = () => {
             onChange={handleChangeEpoch}
             type="number"
             id="epoch"
-            className="flex w-full p-1 rounded"
+            className="flex w-full px-2 py-1 rounded"
           />
         </label>
         <label htmlFor="iso" className="flex-1">
@@ -99,7 +99,7 @@ const UnixTimestampConverter = () => {
             onBlur={handleConvertFromDate}
             type="text"
             id="iso"
-            className="flex w-full p-1 rounded"
+            className="flex w-full px-2 py-1 rounded"
           />
         </label>
       </section>
@@ -112,7 +112,7 @@ const UnixTimestampConverter = () => {
               value={dayjs.unix(epoch).toDate().toLocaleString()}
               type="text"
               id="local"
-              className="flex w-full p-1 rounded"
+              className="flex w-full px-2 py-1 rounded"
               readOnly
             />
           </label>
@@ -122,7 +122,7 @@ const UnixTimestampConverter = () => {
               value={dayjs.unix(epoch).fromNow()}
               type="text"
               id="rel"
-              className="flex w-full p-1 rounded"
+              className="flex w-full px-2 py-1 rounded"
               readOnly
             />
           </label>
@@ -134,7 +134,7 @@ const UnixTimestampConverter = () => {
               value={dayjs.unix(epoch).dayOfYear()}
               type="text"
               id="dayyear"
-              className="flex w-full p-1 rounded"
+              className="flex w-full px-2 py-1 rounded"
               readOnly
             />
           </label>
@@ -144,7 +144,7 @@ const UnixTimestampConverter = () => {
               value={dayjs.unix(epoch).week()}
               type="text"
               id="weekyear"
-              className="flex w-full p-1 rounded"
+              className="flex w-full px-2 py-1 rounded"
               readOnly
             />
           </label>
@@ -156,7 +156,7 @@ const UnixTimestampConverter = () => {
               value={`${dayjs.unix(epoch).isLeapYear()}`}
               type="text"
               id="leap"
-              className="flex w-full p-1 rounded"
+              className="flex w-full px-2 py-1 rounded"
               readOnly
             />
           </label>
@@ -166,7 +166,7 @@ const UnixTimestampConverter = () => {
               value={dayjs.unix(epoch).format('BBBB')}
               type="text"
               id="be"
-              className="flex w-full p-1 rounded"
+              className="flex w-full px-2 py-1 rounded"
               readOnly
             />
           </label>

@@ -58,12 +58,12 @@ const RegexTester = () => {
           <div className="flex items-center space-x-2">
             <input
               onChange={handleChangeSearch}
-              className="flex-1 px-4 py-1 bg-white rounded-md"
+              className="flex-1 px-2 py-1 bg-white rounded-md"
               value={search}
             />
             <input
               onChange={handleChangeFlag}
-              className="w-1/12 px-4 py-1 bg-white rounded-md"
+              className="w-1/12 px-2 py-1 bg-white rounded-md"
               value={flag}
             />
           </div>
