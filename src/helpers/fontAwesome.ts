@@ -5,10 +5,10 @@ import {
   faHtml5,
   faJsSquare,
 } from '@fortawesome/free-brands-svg-icons';
-import { faRegistered } from '@fortawesome/free-regular-svg-icons';
 import {
   faCamera,
   faClock,
+  faRegistered,
   faCode,
   faCopy,
   faDatabase,
