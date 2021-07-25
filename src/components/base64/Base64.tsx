@@ -112,7 +112,7 @@ const Base64 = () => {
           </div>
           <button
             type="button"
-            className="btn"
+            className="w-16 btn"
             onClick={handleCopyOutput}
             disabled={copied}
           >

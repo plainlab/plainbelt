@@ -51,7 +51,7 @@ const SqlFormatter = () => {
         <span className="flex space-x-4">
           <button
             type="button"
-            className="btn"
+            className="w-16 btn"
             onClick={handleCopyOutput}
             disabled={copied}
           >

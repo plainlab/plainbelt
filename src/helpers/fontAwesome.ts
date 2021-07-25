@@ -8,6 +8,7 @@ import {
 import {
   faCamera,
   faClock,
+  faRegistered,
   faCode,
   faCopy,
   faDatabase,
@@ -26,5 +27,6 @@ library.add(
   faExchangeAlt,
   faDatabase,
   faJsSquare,
+  faRegistered,
   faCamera
 );
