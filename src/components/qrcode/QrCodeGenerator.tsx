@@ -2,7 +2,7 @@ import { clipboard, ipcRenderer } from 'electron';
 import React, { useState } from 'react';
 import { useDebouncedEffect } from '../../helpers/effectHooks';
 
-const HtmlPreview = () => {
+const QRCodeGenerator = () => {
   const [content, setContent] = useState('https://plainbelt.github.io');
   const [qrCode, setQrCode] = useState();
   const [opening, setOpening] = useState(false);
@@ -34,8 +34,9 @@ const HtmlPreview = () => {
   const handleSave = async () => {
     setSaving(true);
     await ipcRenderer.invoke('save-file', {
-      content: qrCode,
+      content: (qrCode || ',').split(',')[1],
       defaultPath: 'qrcode.png',
+      encoding: 'base64',
     });
     setSaving(false);
   };
@@ -84,4 +85,4 @@ const HtmlPreview = () => {
   );
 };
 
-export default HtmlPreview;
+export default QRCodeGenerator;

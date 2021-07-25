@@ -10,6 +10,7 @@
 - [x] Markdown to HTML Converter
 - [x] HTML Preview
 - [x] QRCode Generator
+- [x] QRCode Reader
 - [x] Base64 Encode/Decode
 - [x] Text Diff
 - [x] JSON Formatter

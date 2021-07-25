@@ -11,7 +11,14 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  dialog,
+  ipcMain,
+  nativeImage,
+  shell,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { FileFilter, IpcMainInvokeEvent } from 'electron/main';
@@ -123,7 +130,11 @@ const createWindow = async () => {
 // use Buffer.from(buffer).toString()
 ipcMain.handle(
   'open-file',
-  async (_event: IpcMainInvokeEvent, filters: FileFilter[]) => {
+  async (
+    _event: IpcMainInvokeEvent,
+    filters: FileFilter[],
+    type: 'path' | 'buffer'
+  ) => {
     const files = await dialog.showOpenDialog({
       properties: ['openFile'],
       filters,
@@ -131,8 +142,12 @@ ipcMain.handle(
 
     let content;
     if (files) {
-      const buffer = await promisify(fs.readFile)(files.filePaths[0]);
-      content = buffer;
+      const fpath = files.filePaths[0];
+      if (type === 'path') {
+        content = fpath;
+      } else {
+        content = await promisify(fs.readFile)(fpath);
+      }
     }
     return content;
   }
@@ -147,14 +162,16 @@ ipcMain.handle(
 
 ipcMain.handle(
   'save-file',
-  async (_event: IpcMainInvokeEvent, { defaultPath, content }) => {
+  async (_event: IpcMainInvokeEvent, { defaultPath, content, encoding }) => {
     const file = await dialog.showSaveDialog({
       defaultPath,
     });
 
     if (!file || !file.filePath) return;
 
-    await promisify(fs.writeFile)(file.filePath, content);
+    await promisify(fs.writeFile)(file.filePath, content, {
+      encoding,
+    });
   }
 );
 

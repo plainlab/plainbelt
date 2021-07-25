@@ -6,6 +6,7 @@ import {
   faJsSquare,
 } from '@fortawesome/free-brands-svg-icons';
 import {
+  faCamera,
   faClock,
   faCode,
   faCopy,
@@ -24,5 +25,6 @@ library.add(
   faCode,
   faExchangeAlt,
   faDatabase,
-  faJsSquare
+  faJsSquare,
+  faCamera
 );
