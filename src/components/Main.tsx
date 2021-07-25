@@ -10,6 +10,7 @@ import QrCodeGenerator from './qrcode/QrCodeGenerator';
 import Base64 from './base64/Base64';
 import DiffText from './diff/TextDiff';
 import SqlFormatter from './sql/SqlFormatter';
+import JsonFormatter from './json/JsonFormatter';
 
 const Main = () => {
   const routes = [
@@ -50,6 +51,12 @@ const Main = () => {
       Component: DiffText,
     },
     {
+      icon: <FontAwesomeIcon icon={['fab', 'js-square']} />,
+      path: '/json-formatter',
+      name: 'JSON Formatter',
+      Component: JsonFormatter,
+    },
+    {
       icon: <FontAwesomeIcon icon="database" />,
       path: '/sql-formatter',
       name: 'SQL Formatter',
@@ -72,7 +79,7 @@ const Main = () => {
               <NavLink
                 to={path}
                 key={path}
-                className="rounded-lg px-3 py-1 mb-1 space-x-1 items-center justify-start flex"
+                className="flex items-center justify-start px-3 py-1 mb-1 space-x-1 rounded-lg"
                 activeClassName="bg-blue-400 text-white"
               >
                 <span className="w-6">{icon}</span>
@@ -84,7 +91,7 @@ const Main = () => {
 
         {/* Main content */}
         <section className="relative flex flex-col w-full bg-gray-200">
-          <div className="h-full overflow-x-hidden overflow-y-auto px-6 my-6">
+          <div className="h-full px-6 my-6 overflow-x-hidden overflow-y-auto">
             {routes.map(({ path, name, Component }) => (
               <Route key={path} exact path={path}>
                 <Component />

@@ -58,7 +58,7 @@ const TextDiff = () => {
   }, [left, right, diffType]);
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="flex flex-col min-h-full">
       <div className="flex justify-between mb-1">
         <span className="flex space-x-2">
           <button type="button" className="btn" onClick={handleClipboardLeft}>
@@ -76,22 +76,22 @@ const TextDiff = () => {
           </button>
         </span>
       </div>
-      <section className="flex flex-1 flex-col space-y-2 min-h-full">
-        <div className="flex min-h-full flex-1 space-x-2">
+      <section className="flex flex-col flex-1 min-h-full space-y-2">
+        <div className="flex flex-1 min-h-full space-x-2">
           <textarea
             onChange={handleChangeLeft}
-            className="flex-1 min-h-full bg-white p-4 rounded-md"
+            className="flex-1 min-h-full p-4 bg-white rounded-md"
             value={left}
           />
           <textarea
             onChange={handleChangeRight}
-            className="flex-1 min-h-full bg-white p-4 rounded-md"
+            className="flex-1 min-h-full p-4 bg-white rounded-md"
             value={right}
           />
         </div>
 
-        <div className="flex flex-0 space-x-4 items-center justify-between">
-          <div className="flex flex-0 space-x-4 items-center">
+        <div className="flex items-center justify-between space-x-4 flex-0">
+          <div className="flex items-center space-x-4 flex-0">
             {diffTypes.map((dt) => (
               <label
                 htmlFor={dt}
@@ -116,7 +116,7 @@ const TextDiff = () => {
         </div>
 
         <section
-          className="w-full min-h-full bg-gray-100 p-4 flex-1 rounded-md"
+          className="flex-1 w-full min-h-full p-4 bg-gray-100 rounded-md"
           dangerouslySetInnerHTML={{ __html: diff }}
         />
       </section>

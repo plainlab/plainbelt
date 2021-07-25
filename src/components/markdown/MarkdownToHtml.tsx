@@ -33,7 +33,7 @@ const Md2Html = () => {
   };
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="flex flex-col min-h-full">
       <div className="flex justify-between mb-1">
         <span className="flex space-x-2">
           <button type="button" className="btn" onClick={handleClipboard}>
@@ -66,21 +66,21 @@ const Md2Html = () => {
           </button>
         </span>
       </div>
-      <div className="flex min-h-full flex-1 space-x-2">
+      <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChange}
-          className="flex-1 min-h-full bg-white p-4 rounded-md"
+          className="flex-1 min-h-full p-4 bg-white rounded-md"
           value={md}
           disabled={opening}
         />
         {preview ? (
           <section
-            className="flex-1 min-h-full bg-gray-100 p-4 prose w-full rounded-md"
+            className="flex-1 max-w-full min-h-full p-4 prose bg-gray-100 rounded-md"
             dangerouslySetInnerHTML={{ __html: marked(md) }}
           />
         ) : (
           <textarea
-            className="flex-1 min-h-full bg-gray-100 p-4 rounded-md"
+            className="flex-1 min-h-full p-4 bg-gray-100 rounded-md"
             value={marked(md)}
             readOnly
           />

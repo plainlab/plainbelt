@@ -45,7 +45,7 @@ const HtmlPreview = () => {
   };
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="flex flex-col min-h-full">
       <div className="flex justify-between mb-1">
         <span className="flex space-x-2">
           <button type="button" className="btn" onClick={handleClipboard}>
@@ -73,10 +73,10 @@ const HtmlPreview = () => {
       <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChange}
-          className="flex-1 min-h-full bg-white p-4 rounded-md"
+          className="flex-1 min-h-full p-4 bg-white rounded-md"
           value={content}
         />
-        <section className="flex-1 min-h-full flex items-center p-4 prose bg-gray-100 rounded-md">
+        <section className="flex items-center flex-1 max-w-full min-h-full p-4 prose bg-gray-100 rounded-md">
           {qrCode && <img src={qrCode} alt={content} />}
         </section>
       </div>

@@ -1,5 +1,10 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab, faMarkdown, faHtml5 } from '@fortawesome/free-brands-svg-icons';
+import {
+  fab,
+  faMarkdown,
+  faHtml5,
+  faJsSquare,
+} from '@fortawesome/free-brands-svg-icons';
 import {
   faClock,
   faCode,
@@ -18,5 +23,6 @@ library.add(
   faCopy,
   faCode,
   faExchangeAlt,
-  faDatabase
+  faDatabase,
+  faJsSquare
 );

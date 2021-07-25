@@ -46,7 +46,7 @@ const Base64 = () => {
   }, [input, encode]);
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="flex flex-col min-h-full">
       <div className="flex justify-between mb-1">
         <span className="flex space-x-2">
           <button type="button" className="btn" onClick={handleClipboardInput}>
@@ -60,7 +60,7 @@ const Base64 = () => {
           >
             Open...
           </button>
-          <div className="flex space-x-2 items-center">
+          <div className="flex items-center space-x-2">
             <label htmlFor="string" className="flex items-center space-x-1">
               <input
                 type="radio"
@@ -86,7 +86,7 @@ const Base64 = () => {
           </div>
         </span>
         <span className="flex space-x-4">
-          <div className="flex space-x-4 items-center">
+          <div className="flex items-center space-x-4">
             <label htmlFor="encoder" className="flex items-center space-x-1">
               <input
                 type="radio"
@@ -120,16 +120,16 @@ const Base64 = () => {
           </button>
         </span>
       </div>
-      <div className="flex min-h-full flex-1">
+      <div className="flex flex-1 min-h-full">
         <textarea
           onChange={handleChangeInput}
-          className="flex-1 min-h-full bg-white p-4 rounded-md"
+          className="flex-1 min-h-full p-4 bg-white rounded-md"
           value={input}
           disabled={opening}
         />
         <div className="mx-1" />
         <textarea
-          className="flex-1 min-h-full bg-gray-100 p-4 rounded-md"
+          className="flex-1 min-h-full p-4 bg-gray-100 rounded-md"
           value={output}
           readOnly
         />

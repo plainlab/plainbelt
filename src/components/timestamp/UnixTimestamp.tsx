@@ -63,8 +63,8 @@ const UnixTimestampConverter = () => {
   }, [epoch]);
 
   return (
-    <div className="min-h-full flex flex-col">
-      <section className="flex justify-start space-x-2 mb-4">
+    <div className="flex flex-col min-h-full">
+      <section className="flex justify-start mb-4 space-x-2">
         <button type="button" className="btn" onClick={handleClipboard}>
           Clipboard
         </button>
@@ -80,7 +80,7 @@ const UnixTimestampConverter = () => {
         </button>
       </section>
 
-      <section className="flex items-center justify-between space-x-4 mb-4 pb-4">
+      <section className="flex items-center justify-between pb-4 mb-4 space-x-4">
         <label htmlFor="epoch" className="flex-1">
           <span>Unix timestamp:</span>
           <input
@@ -104,7 +104,7 @@ const UnixTimestampConverter = () => {
         </label>
       </section>
 
-      <section className="flex flex-col space-y-4 w-full p-4 pb-8 rounded-md shadow-sm bg-gray-100 border mb-4">
+      <section className="flex flex-col w-full p-4 pb-8 mb-4 space-y-4 bg-gray-100 border rounded-md shadow-sm">
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="local" className="flex-1">
             <span>Local:</span>
@@ -172,7 +172,7 @@ const UnixTimestampConverter = () => {
           </label>
         </section>
       </section>
-      <section className="pt-4 space-y-1 flex items-center space-x-2 pb-4">
+      <section className="flex items-center pt-4 pb-4 space-x-2 space-y-1">
         <p>The current Unix epoch time is</p>
         <span className="bg-gray-100 border shadow-sm px-2 py-0.5 rounded-md font-mono">
           {date.unix()}

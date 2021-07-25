@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { format } from 'sql-formatter';
 import { ipcRenderer, clipboard } from 'electron';
 
-const SqlFormatter = () => {
-  const [input, setInput] = useState('SELECT * FROM tbl');
+const JsonFormatter = () => {
+  const [input, setInput] = useState(
+    '{"name":"PlainBelt","url":"https://github.com/plainbelt/plainbelt"}'
+  );
   const [output, setOutput] = useState('');
   const [opening, setOpening] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [seperator, setSeperator] = useState('4 ⎵');
 
   const handleChangeInput = (evt: { target: { value: string } }) =>
     setInput(evt.target.value);
@@ -28,9 +30,25 @@ const SqlFormatter = () => {
     setTimeout(() => setCopied(false), 500);
   };
 
+  const seperators = ['4 ⎵', '2 ⎵', '1 Tab', 'Minified'];
+
   useEffect(() => {
-    setOutput(format(input));
-  }, [input]);
+    let sep: string | number | undefined = '\t';
+    if (seperator === '4 ⎵') {
+      sep = 4;
+    } else if (seperator === '2 ⎵') {
+      sep = 2;
+    } else if (seperator === 'Minified') {
+      sep = undefined;
+    }
+
+    try {
+      const out = JSON.stringify(JSON.parse(input), null, sep);
+      setOutput(out);
+    } catch (e) {
+      setOutput(e.message);
+    }
+  }, [input, seperator]);
 
   return (
     <div className="flex flex-col min-h-full">
@@ -49,9 +67,26 @@ const SqlFormatter = () => {
           </button>
         </span>
         <span className="flex space-x-4">
+          {seperators.map((sep) => (
+            <label
+              htmlFor={sep}
+              className="flex items-center space-x-1"
+              key={sep}
+            >
+              <input
+                type="radio"
+                className="btn"
+                name="seperator"
+                id={sep}
+                checked={seperator === sep}
+                onChange={() => setSeperator(sep)}
+              />
+              <p>{sep}</p>
+            </label>
+          ))}
           <button
             type="button"
-            className="btn"
+            className="w-16 btn"
             onClick={handleCopyOutput}
             disabled={copied}
           >
@@ -76,4 +111,4 @@ const SqlFormatter = () => {
   );
 };
 
-export default SqlFormatter;
+export default JsonFormatter;

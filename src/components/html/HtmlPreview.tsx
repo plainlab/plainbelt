@@ -24,7 +24,7 @@ const HtmlPreview = () => {
   };
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="flex flex-col min-h-full">
       <div className="flex justify-start mb-1 space-x-2">
         <button type="button" className="btn" onClick={handleClipboard}>
           Clipboard
@@ -41,12 +41,12 @@ const HtmlPreview = () => {
       <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChange}
-          className="flex-1 min-h-full bg-white p-4 rounded-md"
+          className="flex-1 min-h-full p-4 bg-white rounded-md"
           value={html}
           disabled={opening}
         />
         <section
-          className="flex-1 min-h-full bg-gray-100 p-4 prose rounded-md"
+          className="flex-1 max-w-full min-h-full p-4 prose bg-gray-100 rounded-md"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
