@@ -10,9 +10,15 @@
 - [x] Markdown to HTML Converter
 - [x] HTML Preview
 - [x] QRCode Generator
-- [x] Base64 Encoder / Decoder
+- [x] Base64 Encode/Decode
 - [x] Text Diff
-- [x] SQL formatter
+- [x] JSON Formatter
+- [x] SQL Formatter
+- [ ] JWT Debugger
+- [ ] Number Base Converter
+- [ ] URL Encode/Decode
+- [ ] HTML Entity Encode/Decode
+- [ ] Regex Tester
 
 ## Installation
 
