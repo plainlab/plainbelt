@@ -6,6 +6,12 @@
 
 ## Features
 
+- [x] Multiple plain text tools
+- [ ] Clipboard auto detection
+- [ ] Tray icon for quick action
+
+## Tools list
+
 - [x] Unix Timestamp Converter
 - [x] Markdown to HTML Converter
 - [x] HTML Preview
