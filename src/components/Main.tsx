@@ -88,11 +88,11 @@ const Main = () => {
       <main className="relative flex flex-1 min-h-0">
         {/* Left sidebar */}
         <nav className="flex flex-col w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
-          <div className="flex items-center m-2 space-x-1 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600">
-            <FontAwesomeIcon icon="search" className="ml-3" />
+          <div className="flex items-center px-3 m-2 space-x-1 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600 focus-within:ring-2 focus-within:ring-blue-500">
+            <FontAwesomeIcon icon="search" />
             <input
               type="text"
-              className="w-full p-1 bg-gray-200 border-none rounded-r-md focus:outline-none focus:ring-0"
+              className="w-full p-1 bg-gray-200 border-none rounded-r-md focus:ring-0"
               value={search}
               onChange={handleSearch}
               placeholder="Search..."

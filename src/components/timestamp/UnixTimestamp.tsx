@@ -88,7 +88,7 @@ const UnixTimestampConverter = () => {
             onChange={handleChangeEpoch}
             type="number"
             id="epoch"
-            className="flex w-full px-2 py-1 rounded"
+            className="flex w-full px-2 py-1"
           />
         </label>
         <label htmlFor="iso" className="flex-1">
