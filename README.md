@@ -7,8 +7,9 @@
 ## Features
 
 - [x] Multiple plain text tools
+- [x] Tray icon
 - [ ] Clipboard auto detection
-- [ ] Tray icon for quick action
+- [ ] Global hotkey
 
 ## Tools list
 

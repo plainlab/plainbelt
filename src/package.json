@@ -1,7 +1,7 @@
 {
   "name": "plainbelt",
   "productName": "plainbelt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A toolbelt for all your plain text",
   "main": "./main.prod.js",
   "author": {
