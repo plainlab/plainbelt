@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
@@ -78,13 +78,29 @@ const Main = () => {
     },
   ];
 
+  const [search, setSearch] = useState('');
+  const handleSearch = (e: { target: { value: string } }) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className="absolute inset-0 flex flex-col overflow-hidden">
       <main className="relative flex flex-1 min-h-0">
         {/* Left sidebar */}
         <nav className="flex flex-col w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
+          <div className="flex items-center m-2 space-x-1 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600">
+            <FontAwesomeIcon icon="search" className="ml-3" />
+            <input
+              type="text"
+              className="w-full p-1 bg-gray-200 border-none rounded-r-md focus:outline-none focus:ring-0"
+              value={search}
+              onChange={handleSearch}
+              placeholder="Search..."
+            />
+          </div>
+
           <div
-            className="px-2 my-6"
+            className="px-2 my-4"
             role="menu"
             aria-orientation="horizontal"
             aria-labelledby="options-menu"
