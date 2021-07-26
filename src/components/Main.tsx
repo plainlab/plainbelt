@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
@@ -14,74 +14,86 @@ import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
 
-const Main = () => {
-  const routes = [
-    {
-      icon: <FontAwesomeIcon icon="clock" />,
-      path: '/unix-converter',
-      name: 'Unix Time Converter',
-      Component: UnixTimestamp,
-    },
-    {
-      icon: <FontAwesomeIcon icon="registered" />,
-      path: '/regex-tester',
-      name: 'Regex Tester',
-      Component: RegexTester,
-    },
-    {
-      icon: <FontAwesomeIcon icon={['fab', 'markdown']} />,
-      path: '/markdown-to-html',
-      name: 'Markdown to HTML',
-      Component: MarkdownToHtml,
-    },
-    {
-      icon: <FontAwesomeIcon icon={['fab', 'html5']} />,
-      path: '/html-preview',
-      name: 'HTML Preview',
-      Component: HtmlPreview,
-    },
-    {
-      icon: <FontAwesomeIcon icon="qrcode" />,
-      path: '/qrcode-generator',
-      name: 'QRCode Generator',
-      Component: QrCodeGenerator,
-    },
-    {
-      icon: <FontAwesomeIcon icon="camera" />,
-      path: '/qrcode-reader',
-      name: 'QRCode Reader',
-      Component: QRCodeReader,
-    },
-    {
-      icon: <FontAwesomeIcon icon="code" />,
-      path: '/base64-encoder',
-      name: 'Base64 Encoder',
-      Component: Base64,
-    },
-    {
-      icon: <FontAwesomeIcon icon="exchange-alt" />,
-      path: '/text-diff',
-      name: 'Text Diff',
-      Component: DiffText,
-    },
-    {
-      icon: <FontAwesomeIcon icon={['fab', 'js-square']} />,
-      path: '/json-formatter',
-      name: 'JSON Formatter',
-      Component: JsonFormatter,
-    },
-    {
-      icon: <FontAwesomeIcon icon="database" />,
-      path: '/sql-formatter',
-      name: 'SQL Formatter',
-      Component: SqlFormatter,
-    },
-  ];
+const defaultRoutes = [
+  {
+    icon: <FontAwesomeIcon icon="clock" />,
+    path: '/unix-converter',
+    name: 'Unix Time Converter',
+    Component: UnixTimestamp,
+  },
+  {
+    icon: <FontAwesomeIcon icon="registered" />,
+    path: '/regex-tester',
+    name: 'Regex Tester',
+    Component: RegexTester,
+  },
+  {
+    icon: <FontAwesomeIcon icon={['fab', 'markdown']} />,
+    path: '/markdown-to-html',
+    name: 'Markdown to HTML',
+    Component: MarkdownToHtml,
+  },
+  {
+    icon: <FontAwesomeIcon icon={['fab', 'html5']} />,
+    path: '/html-preview',
+    name: 'HTML Preview',
+    Component: HtmlPreview,
+  },
+  {
+    icon: <FontAwesomeIcon icon="qrcode" />,
+    path: '/qrcode-generator',
+    name: 'QRCode Generator',
+    Component: QrCodeGenerator,
+  },
+  {
+    icon: <FontAwesomeIcon icon="camera" />,
+    path: '/qrcode-reader',
+    name: 'QRCode Reader',
+    Component: QRCodeReader,
+  },
+  {
+    icon: <FontAwesomeIcon icon="code" />,
+    path: '/base64-encoder',
+    name: 'Base64 Encoder',
+    Component: Base64,
+  },
+  {
+    icon: <FontAwesomeIcon icon="exchange-alt" />,
+    path: '/text-diff',
+    name: 'Text Diff',
+    Component: DiffText,
+  },
+  {
+    icon: <FontAwesomeIcon icon={['fab', 'js-square']} />,
+    path: '/json-formatter',
+    name: 'JSON Formatter',
+    Component: JsonFormatter,
+  },
+  {
+    icon: <FontAwesomeIcon icon="database" />,
+    path: '/sql-formatter',
+    name: 'SQL Formatter',
+    Component: SqlFormatter,
+  },
+];
 
+const Main = () => {
+  const [routes, setRoutes] = useState(defaultRoutes);
   const [search, setSearch] = useState('');
+
   const handleSearch = (e: { target: { value: string } }) => {
     setSearch(e.target.value);
   };
+
+  useEffect(() => {
+    if (search.trim()) {
+      setRoutes(
+        defaultRoutes.filter(({ name }) => name.match(new RegExp(search, 'gi')))
+      );
+    } else {
+      setRoutes(defaultRoutes);
+    }
+  }, [search]);
 
   return (
     <div className="absolute inset-0 flex flex-col overflow-hidden">
@@ -122,7 +134,7 @@ const Main = () => {
         {/* Main content */}
         <section className="relative flex flex-col w-full bg-gray-200">
           <div className="h-full px-6 my-6 overflow-x-hidden overflow-y-auto">
-            {routes.map(({ path, name, Component }) => (
+            {defaultRoutes.map(({ path, name, Component }) => (
               <Route key={path} exact path={path}>
                 <Component />
                 <Helmet>
