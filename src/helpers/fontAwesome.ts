@@ -15,6 +15,7 @@ import {
   faExchangeAlt,
   faQrcode,
   faSearch,
+  faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -30,5 +31,6 @@ library.add(
   faJsSquare,
   faRegistered,
   faSearch,
+  faTimesCircle,
   faCamera
 );
