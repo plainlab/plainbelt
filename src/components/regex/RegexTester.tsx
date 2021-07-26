@@ -58,12 +58,12 @@ const RegexTester = () => {
           <div className="flex items-center space-x-2">
             <input
               onChange={handleChangeSearch}
-              className="flex-1 px-4 py-1 bg-white rounded-md"
+              className="flex-1 px-2 py-1 bg-white rounded-md"
               value={search}
             />
             <input
               onChange={handleChangeFlag}
-              className="w-1/12 px-4 py-1 bg-white rounded-md"
+              className="w-1/12 px-2 py-1 bg-white rounded-md"
               value={flag}
             />
           </div>
@@ -83,7 +83,7 @@ const RegexTester = () => {
           </div>
           <textarea
             onChange={handleChangeInput}
-            className="flex-1 p-4 bg-white rounded-md"
+            className="flex-1 p-2 bg-white rounded-md"
             value={input}
           />
         </section>
@@ -101,7 +101,7 @@ const RegexTester = () => {
             </span>
           </div>
           <section
-            className="flex-1 w-full p-4 whitespace-pre bg-gray-100 rounded-md"
+            className="flex-1 w-full p-2 whitespace-pre bg-gray-100 rounded-md"
             dangerouslySetInnerHTML={{ __html: output }}
           />
         </section>

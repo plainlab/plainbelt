@@ -97,12 +97,12 @@ const JsonFormatter = () => {
       <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChangeInput}
-          className="flex-1 min-h-full p-4 bg-white rounded-md"
+          className="flex-1 min-h-full p-2 bg-white rounded-md"
           value={input}
           disabled={opening}
         />
         <textarea
-          className="flex-1 min-h-full p-4 bg-gray-100 rounded-md"
+          className="flex-1 min-h-full p-2 bg-gray-100 rounded-md"
           value={output}
           readOnly
         />

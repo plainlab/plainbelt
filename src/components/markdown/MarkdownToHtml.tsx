@@ -69,18 +69,18 @@ const Md2Html = () => {
       <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChange}
-          className="flex-1 min-h-full p-4 bg-white rounded-md"
+          className="flex-1 min-h-full p-2 bg-white rounded-md"
           value={md}
           disabled={opening}
         />
         {preview ? (
           <section
-            className="flex-1 max-w-full min-h-full p-4 prose bg-gray-100 rounded-md"
+            className="flex-1 max-w-full min-h-full p-2 prose bg-gray-100 rounded-md"
             dangerouslySetInnerHTML={{ __html: marked(md) }}
           />
         ) : (
           <textarea
-            className="flex-1 min-h-full p-4 bg-gray-100 rounded-md"
+            className="flex-1 min-h-full p-2 bg-gray-100 rounded-md"
             value={marked(md)}
             readOnly
           />
