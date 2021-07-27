@@ -8,10 +8,10 @@
   }
 
   input {
-    @apply rounded focus:ring-blue-500 focus:outline-none focus:ring-2;
+    @apply rounded focus:ring-blue-500 focus:outline-none focus:ring-2 focus:ring-inset;
   }
 
   textarea {
-    @apply rounded focus:ring-blue-500 focus:outline-none focus:ring-2;
+    @apply rounded focus:ring-blue-500 focus:outline-none focus:ring-2 focus:ring-inset;
   }
 }
