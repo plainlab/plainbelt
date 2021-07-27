@@ -8,6 +8,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear';
 import isLeapYear from 'dayjs/plugin/isLeapYear';
 import weekday from 'dayjs/plugin/weekday';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
+import { useLocation } from 'react-router-dom';
 
 dayjs.extend(relativeTime);
 dayjs.extend(dayOfYear);
@@ -16,7 +17,12 @@ dayjs.extend(isLeapYear);
 dayjs.extend(weekday);
 dayjs.extend(buddhistEra);
 
+interface LocationState {
+  input1: number;
+}
+
 const UnixTimestampConverter = () => {
+  const location = useLocation<LocationState>();
   const [date, setDate] = useState(dayjs());
   const [copied, setCopied] = useState(false);
 
@@ -26,10 +32,19 @@ const UnixTimestampConverter = () => {
   useEffect(() => {
     const timerID = setInterval(() => setDate(dayjs()), 1000);
 
-    return function cleanup() {
+    return () => {
       clearInterval(timerID);
     };
   });
+
+  useEffect(() => {
+    if (location.state) {
+      const { input1 } = location.state;
+      if (input1) {
+        setEpoch(input1);
+      }
+    }
+  }, [location]);
 
   const handleClipboard = () => {
     const cl = parseInt(clipboard.readText(), 10) || dayjs().unix();
@@ -63,8 +78,8 @@ const UnixTimestampConverter = () => {
   }, [epoch]);
 
   return (
-    <div className="flex flex-col min-h-full">
-      <section className="flex justify-start mb-4 space-x-2">
+    <div className="flex flex-col min-h-full space-y-4">
+      <section className="flex justify-start space-x-2">
         <button type="button" className="btn" onClick={handleClipboard}>
           Clipboard
         </button>
@@ -80,9 +95,9 @@ const UnixTimestampConverter = () => {
         </button>
       </section>
 
-      <section className="flex items-center justify-between pb-4 mb-4 space-x-4">
+      <section className="flex items-center justify-between pb-4 space-x-4">
         <label htmlFor="epoch" className="flex-1">
-          <span>Unix timestamp:</span>
+          <p className="mb-1">Unix timestamp:</p>
           <input
             value={epoch}
             onChange={handleChangeEpoch}
@@ -92,7 +107,7 @@ const UnixTimestampConverter = () => {
           />
         </label>
         <label htmlFor="iso" className="flex-1">
-          <span>ISO date:</span>
+          <p className="mb-1">ISO date:</p>
           <input
             value={dateStr}
             onChange={handleChangeDate}
@@ -104,10 +119,10 @@ const UnixTimestampConverter = () => {
         </label>
       </section>
 
-      <section className="flex flex-col w-full p-2 pb-8 mb-4 space-y-4 bg-gray-100 border rounded-md shadow-sm">
+      <section className="flex flex-col w-full p-2 pb-4 space-y-4 bg-gray-100 border rounded-md shadow-sm">
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="local" className="flex-1">
-            <span>Local:</span>
+            <p className="mb-1">Local:</p>
             <input
               value={dayjs.unix(epoch).toDate().toLocaleString()}
               type="text"
@@ -117,9 +132,9 @@ const UnixTimestampConverter = () => {
             />
           </label>
           <label htmlFor="rel" className="flex-1">
-            <span>Relative:</span>
+            <p className="mb-1">Relative:</p>
             <input
-              value={dayjs.unix(epoch).fromNow()}
+              value={dayjs.unix(epoch).from(date)}
               type="text"
               id="rel"
               className="flex w-full px-2 py-1 rounded"
@@ -129,7 +144,7 @@ const UnixTimestampConverter = () => {
         </section>
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="dayyear" className="flex-1">
-            <span>Day of year:</span>
+            <p className="mb-1">Day of year:</p>
             <input
               value={dayjs.unix(epoch).dayOfYear()}
               type="text"
@@ -139,7 +154,7 @@ const UnixTimestampConverter = () => {
             />
           </label>
           <label htmlFor="weekyear" className="flex-1">
-            <span>Week of year:</span>
+            <p className="mb-1">Week of year:</p>
             <input
               value={dayjs.unix(epoch).week()}
               type="text"
@@ -151,7 +166,7 @@ const UnixTimestampConverter = () => {
         </section>
         <section className="flex items-center justify-between space-x-4">
           <label htmlFor="leap" className="flex-1">
-            <span>Is leap year:</span>
+            <p className="mb-1">Is leap year:</p>
             <input
               value={`${dayjs.unix(epoch).isLeapYear()}`}
               type="text"
@@ -161,7 +176,7 @@ const UnixTimestampConverter = () => {
             />
           </label>
           <label htmlFor="be" className="flex-1">
-            <span> Buddhist Era (B.E.):</span>
+            <p className="mb-1">Buddhist Era (B.E.):</p>
             <input
               value={dayjs.unix(epoch).format('BBBB')}
               type="text"
@@ -174,9 +189,9 @@ const UnixTimestampConverter = () => {
       </section>
       <section className="flex items-center pt-4 pb-4 space-x-2 space-y-1">
         <p>The current Unix epoch time is</p>
-        <span className="bg-gray-100 border shadow-sm px-2 py-0.5 rounded-md font-mono">
+        <p className="bg-gray-100 border shadow-sm px-2 py-0.5 rounded-md font-mono">
           {date.unix()}
-        </span>
+        </p>
         <button
           type="button"
           className="w-16 btn"

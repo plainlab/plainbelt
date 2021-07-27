@@ -8,7 +8,7 @@
 
 - [x] Multiple plain text tools
 - [x] Tray icon
-- [ ] Clipboard auto detection
+- [x] Clipboard auto detection
 - [ ] Global hotkey
 
 ## Tools list
@@ -27,6 +27,20 @@
 - [ ] Number Base Converter
 - [ ] URL Encode/Decode
 - [ ] HTML Entity Encode/Decode
+
+## Demo
+
+### Unix Timestamp Converter
+
+![Unix](./.erb/assets/unix.png)
+
+### Regex Tester
+
+![Regex](./.erb/assets/regex.png)
+
+### Markdown to HTML converter
+
+![Regex](./.erb/assets/markdown.png)
 
 ## Installation
 
