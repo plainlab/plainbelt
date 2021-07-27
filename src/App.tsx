@@ -15,7 +15,7 @@ export default function App() {
       <Switch>
         <Route path="/" component={Main} />
       </Switch>
-      <Redirect from="*" to="/unix-converter" />
+      <Redirect from="*" to="/auto" />
     </Router>
   );
 }

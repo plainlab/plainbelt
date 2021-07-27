@@ -13,8 +13,15 @@ import SqlFormatter from './sql/SqlFormatter';
 import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
+import Auto from './auto/Auto';
 
 const defaultRoutes = [
+  {
+    icon: <FontAwesomeIcon icon="database" />,
+    path: '/auto',
+    name: 'PlainBelt',
+    Component: Auto,
+  },
   {
     icon: <FontAwesomeIcon icon="clock" />,
     path: '/unix-converter',
@@ -88,10 +95,12 @@ const Main = () => {
   useEffect(() => {
     if (search.trim()) {
       setRoutes(
-        defaultRoutes.filter(({ name }) => name.match(new RegExp(search, 'gi')))
+        defaultRoutes
+          .slice(1)
+          .filter(({ name }) => name.match(new RegExp(search, 'gi')))
       );
     } else {
-      setRoutes(defaultRoutes);
+      setRoutes(defaultRoutes.slice(1));
     }
   }, [search]);
 

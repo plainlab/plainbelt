@@ -89,7 +89,7 @@ const RegexTester = () => {
         </section>
 
         <section className="flex flex-col flex-1 h-1/3">
-          <div className="flex justify-between mb-1">
+          <div className="flex items-center justify-between">
             <div className="flex items-center my-1 space-x-1">
               <span>Search for:</span>
               <span className="font-mono text-gray-400">
