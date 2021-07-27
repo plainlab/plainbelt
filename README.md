@@ -8,8 +8,8 @@
 
 - [x] Multiple plain text tools
 - [x] Tray icon
-- [x] Global hotkey
-- [ ] Clipboard auto detection
+- [x] Clipboard auto detection
+- [ ] Global hotkey
 
 ## Tools list
 
