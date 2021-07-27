@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { ipcRenderer, clipboard } from 'electron';
+import { useLocation } from 'react-router-dom';
+
+interface LocationState {
+  value: string;
+}
 
 const JsonFormatter = () => {
+  const location = useLocation<LocationState>();
+
   const [input, setInput] = useState(
     '{"name":"PlainBelt","url":"https://github.com/plainbelt/plainbelt"}'
   );
@@ -49,6 +56,12 @@ const JsonFormatter = () => {
       setOutput(e.message);
     }
   }, [input, seperator]);
+
+  useEffect(() => {
+    if (location.state && location.state.value) {
+      setInput(location.state.value);
+    }
+  }, [location]);
 
   return (
     <div className="flex flex-col min-h-full">

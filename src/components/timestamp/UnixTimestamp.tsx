@@ -8,6 +8,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear';
 import isLeapYear from 'dayjs/plugin/isLeapYear';
 import weekday from 'dayjs/plugin/weekday';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
+import { useLocation } from 'react-router-dom';
 
 dayjs.extend(relativeTime);
 dayjs.extend(dayOfYear);
@@ -16,7 +17,12 @@ dayjs.extend(isLeapYear);
 dayjs.extend(weekday);
 dayjs.extend(buddhistEra);
 
+interface LocationState {
+  value: string;
+}
+
 const UnixTimestampConverter = () => {
+  const location = useLocation<LocationState>();
   const [date, setDate] = useState(dayjs());
   const [copied, setCopied] = useState(false);
 
@@ -30,6 +36,15 @@ const UnixTimestampConverter = () => {
       clearInterval(timerID);
     };
   });
+
+  useEffect(() => {
+    if (location.state) {
+      const { value } = location.state;
+      if (value) {
+        setEpoch(parseInt(value, 10));
+      }
+    }
+  }, [location]);
 
   const handleClipboard = () => {
     const cl = parseInt(clipboard.readText(), 10) || dayjs().unix();
