@@ -3,7 +3,7 @@ import { ipcRenderer, clipboard } from 'electron';
 import { useLocation } from 'react-router-dom';
 
 interface LocationState {
-  value: string;
+  input1: string;
 }
 
 const JsonFormatter = () => {
@@ -58,8 +58,8 @@ const JsonFormatter = () => {
   }, [input, seperator]);
 
   useEffect(() => {
-    if (location.state && location.state.value) {
-      setInput(location.state.value);
+    if (location.state && location.state.input1) {
+      setInput(location.state.input1);
     }
   }, [location]);
 

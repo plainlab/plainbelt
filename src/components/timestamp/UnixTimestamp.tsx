@@ -18,7 +18,7 @@ dayjs.extend(weekday);
 dayjs.extend(buddhistEra);
 
 interface LocationState {
-  value: string;
+  input1: number;
 }
 
 const UnixTimestampConverter = () => {
@@ -32,16 +32,16 @@ const UnixTimestampConverter = () => {
   useEffect(() => {
     const timerID = setInterval(() => setDate(dayjs()), 1000);
 
-    return function cleanup() {
+    return () => {
       clearInterval(timerID);
     };
   });
 
   useEffect(() => {
     if (location.state) {
-      const { value } = location.state;
-      if (value) {
-        setEpoch(parseInt(value, 10));
+      const { input1 } = location.state;
+      if (input1) {
+        setEpoch(input1);
       }
     }
   }, [location]);
@@ -134,7 +134,7 @@ const UnixTimestampConverter = () => {
           <label htmlFor="rel" className="flex-1">
             <p className="mb-1">Relative:</p>
             <input
-              value={dayjs.unix(epoch).fromNow()}
+              value={dayjs.unix(epoch).from(date)}
               type="text"
               id="rel"
               className="flex w-full px-2 py-1 rounded"

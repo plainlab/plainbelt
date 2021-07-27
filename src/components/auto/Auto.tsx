@@ -3,19 +3,23 @@ import path from 'path';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const detectRoute = (value: string) => {
-  if (parseInt(value, 10) > 0) {
-    return '/unix-converter';
+const detectRouteData = (value: string) => {
+  const intVal = parseInt(value, 10);
+
+  // Unix
+  if (intVal > 1_600_000_000 && intVal < 2_000_000_000) {
+    return { route: '/unix-converter', state: { input1: intVal } };
   }
 
+  // Json
   try {
     JSON.parse(value);
-    return '/json-formatter';
+    return { route: '/json-formatter', state: { input1: value } };
   } catch (e) {
     // ignore
   }
 
-  return '';
+  return {};
 };
 
 const Auto = () => {
@@ -27,9 +31,9 @@ const Auto = () => {
   }, []);
 
   useEffect(() => {
-    const route = detectRoute(value);
-    if (route) {
-      history.push(route, { value });
+    const routeData = detectRouteData(value);
+    if (routeData.route) {
+      history.push(routeData.route, { ...routeData.state });
     }
   }, [value, history]);
 
