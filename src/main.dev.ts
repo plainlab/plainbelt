@@ -153,7 +153,10 @@ const createTray = async () => {
 const registerHotKey = () => {
   globalShortcut.unregisterAll();
   const hotkey = 'Control+Alt+Meta+Space';
-  const success = globalShortcut.register(hotkey, showWindow);
+  const success = globalShortcut.register(hotkey, async () => {
+    await showWindow();
+    mainWindow?.webContents.send('hot-key-called');
+  });
   if (!success) {
     store.set('hotkey', '');
   } else {

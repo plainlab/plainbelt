@@ -27,6 +27,10 @@ const Auto = () => {
   const [hotkey, setHotkey] = useState('');
   const history = useHistory();
 
+  ipcRenderer.on('hot-key-called', () => {
+    setValue(clipboard.readText());
+  });
+
   useEffect(() => {
     setValue(clipboard.readText());
   }, []);
