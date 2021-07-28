@@ -15,6 +15,7 @@ import {
   app,
   BrowserWindow,
   dialog,
+  globalShortcut,
   ipcMain,
   nativeTheme,
   shell,
@@ -27,6 +28,12 @@ import fs from 'fs';
 import QRCode from 'qrcode';
 import { promisify } from 'util';
 import MenuBuilder from './menu';
+
+const Store = require('electron-store');
+
+const store = new Store({
+  hotkey: String,
+});
 
 export default class AppUpdater {
   constructor() {
@@ -130,17 +137,28 @@ const getIcon = () => {
   return '16x16.png';
 };
 
+const showWindow = async () => {
+  if (mainWindow == null) {
+    await createWindow();
+  }
+  mainWindow?.show();
+};
+
 const createTray = async () => {
   tray = new Tray(path.join(__dirname, '../assets/icons', getIcon()));
-
-  tray.on('click', async () => {
-    if (mainWindow == null) {
-      await createWindow();
-    }
-    mainWindow?.show();
-  });
-
+  tray.on('click', showWindow);
   tray.setToolTip('PlainBelt');
+};
+
+const registerHotKey = () => {
+  globalShortcut.unregisterAll();
+  const hotkey = 'Control+Alt+Meta+Space';
+  const success = globalShortcut.register(hotkey, showWindow);
+  if (!success) {
+    store.set('hotkey', '');
+  } else {
+    store.set('hotkey', hotkey);
+  }
 };
 
 /**
@@ -196,6 +214,10 @@ ipcMain.handle(
   }
 );
 
+ipcMain.handle('get-store', (_event, { key }) => {
+  return store.get(key);
+});
+
 /**
  * Add event listeners...
  */
@@ -207,7 +229,16 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.whenReady().then(createWindow).then(createTray).catch(console.log);
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+});
+
+app
+  .whenReady()
+  .then(registerHotKey)
+  .then(createWindow)
+  .then(createTray)
+  .catch(console.log);
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the

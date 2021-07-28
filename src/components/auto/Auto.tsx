@@ -1,4 +1,4 @@
-import { clipboard } from 'electron';
+import { clipboard, ipcRenderer } from 'electron';
 import path from 'path';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -24,11 +24,22 @@ const detectRouteData = (value: string) => {
 
 const Auto = () => {
   const [value, setValue] = useState('');
+  const [hotkey, setHotkey] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     setValue(clipboard.readText());
   }, []);
+
+  useEffect(() => {
+    ipcRenderer
+      .invoke('get-store', { key: 'hotkey' })
+      .then((v: string) => {
+        setHotkey(v);
+        return null;
+      })
+      .catch(() => {});
+  });
 
   useEffect(() => {
     const routeData = detectRouteData(value);
@@ -48,9 +59,14 @@ const Auto = () => {
           />
         </section>
         <p className="mt-4 text-lg font-bold">PlainBelt</p>
-        <a href="https://plainbelt.github.io" className="opacity-70">
+        <a href="https://plainbelt.github.io" className="opacity-50">
           https://plainbelt.github.io
         </a>
+        {hotkey && (
+          <p className="mt-10 opacity-70">
+            <em>Hot key</em>: Control+Alt+Meta+Space (⌃⌥⌘Space in Mac)
+          </p>
+        )}
       </section>
       <div className="flex items-center justify-between w-full my-1">
         <span>No tools was detected for this content:</span>
