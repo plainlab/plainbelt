@@ -1,7 +1,7 @@
 import { clipboard, ipcRenderer } from 'electron';
 import path from 'path';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const detectRouteData = (value: string) => {
   const intVal = parseInt(value, 10);
@@ -26,14 +26,11 @@ const Auto = () => {
   const [value, setValue] = useState('');
   const [hotkey, setHotkey] = useState('');
   const history = useHistory();
-
-  ipcRenderer.on('hot-key-called', () => {
-    setValue(clipboard.readText());
-  });
+  const location = useLocation();
 
   useEffect(() => {
     setValue(clipboard.readText());
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     ipcRenderer

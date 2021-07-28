@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
 
+import { ipcRenderer } from 'electron';
 import MarkdownToHtml from './markdown/MarkdownToHtml';
 import UnixTimestamp from './timestamp/UnixTimestamp';
 import HtmlPreview from './html/HtmlPreview';
@@ -87,10 +88,15 @@ const defaultRoutes = [
 const Main = () => {
   const [routes, setRoutes] = useState(defaultRoutes);
   const [search, setSearch] = useState('');
+  const history = useHistory();
 
   const handleSearch = (e: { target: { value: string } }) => {
     setSearch(e.target.value);
   };
+
+  ipcRenderer.on('hot-key-called', () => {
+    history.push('/auto');
+  });
 
   useEffect(() => {
     if (search.trim()) {
