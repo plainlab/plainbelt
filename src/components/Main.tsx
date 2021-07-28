@@ -17,9 +17,9 @@ import Auto from './auto/Auto';
 
 const defaultRoutes = [
   {
-    icon: <FontAwesomeIcon icon="database" />,
+    icon: <FontAwesomeIcon icon="robot" />,
     path: '/auto',
-    name: 'PlainBelt',
+    name: 'Auto Detection',
     Component: Auto,
   },
   {
@@ -95,12 +95,10 @@ const Main = () => {
   useEffect(() => {
     if (search.trim()) {
       setRoutes(
-        defaultRoutes
-          .slice(1)
-          .filter(({ name }) => name.match(new RegExp(search, 'gi')))
+        defaultRoutes.filter(({ name }) => name.match(new RegExp(search, 'gi')))
       );
     } else {
-      setRoutes(defaultRoutes.slice(1));
+      setRoutes(defaultRoutes);
     }
   }, [search]);
 

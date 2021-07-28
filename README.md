@@ -9,7 +9,7 @@
 - [x] Multiple plain text tools
 - [x] Tray icon
 - [x] Clipboard auto detection
-- [ ] Global hotkey
+- [x] Global hotkey (Control+Alt+Meta+Space for now)
 
 ## Tools list
 
