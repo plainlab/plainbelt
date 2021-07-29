@@ -2,7 +2,7 @@
 
 # PlainBelt
 
-> A toolbelt for your plain text
+> A toolbelt for your plain text. Work offline. Cross-platform.
 
 ## Features
 

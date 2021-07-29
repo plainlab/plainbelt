@@ -94,7 +94,7 @@ const Main = () => {
     setSearch(e.target.value);
   };
 
-  ipcRenderer.on('hot-key-called', () => {
+  ipcRenderer.on('hotkey-pressed', () => {
     history.push('/auto');
   });
 

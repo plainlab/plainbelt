@@ -150,12 +150,12 @@ const createTray = async () => {
   tray.setToolTip('PlainBelt');
 };
 
-const registerHotKey = () => {
+const registerHotkey = () => {
   globalShortcut.unregisterAll();
   const hotkey = 'Control+Alt+Meta+Space';
   const success = globalShortcut.register(hotkey, async () => {
     await showWindow();
-    mainWindow?.webContents.send('hot-key-called');
+    mainWindow?.webContents.send('hotkey-pressed');
   });
   if (!success) {
     store.set('hotkey', '');
@@ -238,7 +238,7 @@ app.on('will-quit', () => {
 
 app
   .whenReady()
-  .then(registerHotKey)
+  .then(registerHotkey)
   .then(createWindow)
   .then(createTray)
   .catch(console.log);

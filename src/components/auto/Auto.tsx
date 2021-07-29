@@ -65,7 +65,7 @@ const Auto = () => {
         </a>
         {hotkey && (
           <p className="mt-10 opacity-70">
-            <em>Hot key</em>: Control+Alt+Meta+Space (⌃⌥⌘Space in Mac)
+            <em>Hotkey</em>: Control+Alt+Meta+Space (⌃⌥⌘Space in Mac)
           </p>
         )}
       </section>
