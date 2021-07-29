@@ -10,10 +10,14 @@ const QRCodeGenerator = () => {
 
   useDebouncedEffect(
     () => {
+      let isMounted = true;
       ipcRenderer
         .invoke('generate-qrcode', { content })
-        .then((qr) => setQrCode(qr))
+        .then((qr) => isMounted && setQrCode(qr))
         .catch(() => {});
+      return () => {
+        isMounted = false;
+      };
     },
     [content],
     500

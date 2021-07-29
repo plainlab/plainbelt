@@ -13,8 +13,9 @@ const detectRouteData = (value: string) => {
 
   // Json
   try {
-    JSON.parse(value);
-    return { route: '/json-formatter', state: { input1: value } };
+    if (typeof JSON.parse(value) === 'object') {
+      return { route: '/json-formatter', state: { input1: value } };
+    }
   } catch (e) {
     // ignore
   }
@@ -22,24 +23,35 @@ const detectRouteData = (value: string) => {
   return {};
 };
 
+interface LocationState {
+  auto: boolean;
+}
+
 const Auto = () => {
   const [value, setValue] = useState('');
   const [hotkey, setHotkey] = useState('');
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<LocationState>();
 
   useEffect(() => {
-    setValue(clipboard.readText());
+    if (location.state && location.state.auto) {
+      setValue(clipboard.readText());
+    }
   }, [location]);
 
   useEffect(() => {
+    let isMounted = true;
     ipcRenderer
       .invoke('get-store', { key: 'hotkey' })
       .then((v: string) => {
-        setHotkey(v);
+        if (isMounted) setHotkey(v);
         return null;
       })
       .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
   });
 
   useEffect(() => {
@@ -70,12 +82,29 @@ const Auto = () => {
         )}
       </section>
       <div className="flex items-center justify-between w-full my-1">
-        <span>No tools was detected for this content:</span>
-        <button type="button" className="w-16 btn" onClick={() => setValue('')}>
-          Clear
-        </button>
+        <section className="flex items-center space-x-2">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => setValue(clipboard.readText())}
+          >
+            Clipboard
+          </button>
+          <button
+            type="button"
+            className="w-16 btn"
+            onClick={() => setValue('')}
+          >
+            Clear
+          </button>
+        </section>
+        {value ? <span>No tools was detected for this content</span> : <span />}
       </div>
-      <textarea className="flex w-full p-2 h-1/3" value={value} readOnly />
+      <textarea
+        className="flex w-full p-2 h-1/3"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
     </div>
   );
 };

@@ -95,7 +95,7 @@ const Main = () => {
   };
 
   ipcRenderer.on('hotkey-pressed', () => {
-    history.push('/auto');
+    history.push('/auto', { auto: true });
   });
 
   useEffect(() => {
