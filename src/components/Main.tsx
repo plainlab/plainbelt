@@ -13,6 +13,7 @@ import SqlFormatter from './sql/SqlFormatter';
 import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
+import CompressImageComponent from './compressImage';
 
 const Main = () => {
   const routes = [
@@ -75,6 +76,13 @@ const Main = () => {
       path: '/sql-formatter',
       name: 'SQL Formatter',
       Component: SqlFormatter,
+    },
+
+    {
+      icon: <FontAwesomeIcon icon="image" />,
+      path: '/compress-image',
+      name: 'Compress Image',
+      Component: CompressImageComponent,
     },
   ];
 
