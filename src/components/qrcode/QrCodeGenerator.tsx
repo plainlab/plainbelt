@@ -10,10 +10,14 @@ const QRCodeGenerator = () => {
 
   useDebouncedEffect(
     () => {
+      let isMounted = true;
       ipcRenderer
         .invoke('generate-qrcode', { content })
-        .then((qr) => setQrCode(qr))
+        .then((qr) => isMounted && setQrCode(qr))
         .catch(() => {});
+      return () => {
+        isMounted = false;
+      };
     },
     [content],
     500
@@ -74,10 +78,10 @@ const QRCodeGenerator = () => {
       <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChange}
-          className="flex-1 min-h-full p-4 bg-white rounded-md"
+          className="flex-1 min-h-full p-2 bg-white rounded-md"
           value={content}
         />
-        <section className="flex items-center flex-1 max-w-full min-h-full p-4 prose bg-gray-100 rounded-md">
+        <section className="flex items-center flex-1 max-w-full min-h-full p-2 prose bg-gray-100 rounded-md">
           {qrCode && <img src={qrCode} alt={content} />}
         </section>
       </div>

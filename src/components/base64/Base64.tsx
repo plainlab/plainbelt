@@ -123,13 +123,13 @@ const Base64 = () => {
       <div className="flex flex-1 min-h-full">
         <textarea
           onChange={handleChangeInput}
-          className="flex-1 min-h-full p-4 bg-white rounded-md"
+          className="flex-1 min-h-full p-2 bg-white rounded-md"
           value={input}
           disabled={opening}
         />
         <div className="mx-1" />
         <textarea
-          className="flex-1 min-h-full p-4 bg-gray-100 rounded-md"
+          className="flex-1 min-h-full p-2 bg-gray-100 rounded-md"
           value={output}
           readOnly
         />

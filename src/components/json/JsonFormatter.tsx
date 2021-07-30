@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { ipcRenderer, clipboard } from 'electron';
+import { useLocation } from 'react-router-dom';
+
+interface LocationState {
+  input1: string;
+}
 
 const JsonFormatter = () => {
+  const location = useLocation<LocationState>();
+
   const [input, setInput] = useState(
     '{"name":"PlainBelt","url":"https://github.com/plainbelt/plainbelt"}'
   );
@@ -50,6 +57,12 @@ const JsonFormatter = () => {
     }
   }, [input, seperator]);
 
+  useEffect(() => {
+    if (location.state && location.state.input1) {
+      setInput(location.state.input1);
+    }
+  }, [location]);
+
   return (
     <div className="flex flex-col min-h-full">
       <div className="flex justify-between mb-1">
@@ -97,12 +110,12 @@ const JsonFormatter = () => {
       <div className="flex flex-1 min-h-full space-x-2">
         <textarea
           onChange={handleChangeInput}
-          className="flex-1 min-h-full p-4 bg-white rounded-md"
+          className="flex-1 min-h-full p-2 bg-white rounded-md"
           value={input}
           disabled={opening}
         />
         <textarea
-          className="flex-1 min-h-full p-4 bg-gray-100 rounded-md"
+          className="flex-1 min-h-full p-2 bg-gray-100 rounded-md"
           value={output}
           readOnly
         />

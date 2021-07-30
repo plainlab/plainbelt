@@ -11,7 +11,16 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  dialog,
+  globalShortcut,
+  ipcMain,
+  nativeTheme,
+  shell,
+  Tray,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { FileFilter, IpcMainInvokeEvent } from 'electron/main';
@@ -19,6 +28,12 @@ import fs from 'fs';
 import QRCode from 'qrcode';
 import { promisify } from 'util';
 import MenuBuilder from './menu';
+
+const Store = require('electron-store');
+
+const store = new Store({
+  hotkey: String,
+});
 
 export default class AppUpdater {
   constructor() {
@@ -29,6 +44,7 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let tray = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -115,6 +131,39 @@ const createWindow = async () => {
   new AppUpdater();
 };
 
+const getIcon = () => {
+  if (process.platform === 'win32') return '16x16.png';
+  if (nativeTheme.shouldUseDarkColors) return '16x16.png';
+  return '16x16.png';
+};
+
+const showWindow = async () => {
+  if (mainWindow == null) {
+    await createWindow();
+  }
+  mainWindow?.show();
+};
+
+const createTray = async () => {
+  tray = new Tray(path.join(__dirname, '../assets/icons', getIcon()));
+  tray.on('click', showWindow);
+  tray.setToolTip('PlainBelt');
+};
+
+const registerHotkey = () => {
+  globalShortcut.unregisterAll();
+  const hotkey = 'Control+Alt+Meta+Space';
+  const success = globalShortcut.register(hotkey, async () => {
+    await showWindow();
+    mainWindow?.webContents.send('hotkey-pressed');
+  });
+  if (!success) {
+    store.set('hotkey', '');
+  } else {
+    store.set('hotkey', hotkey);
+  }
+};
+
 /**
  * Handlers events from React
  */
@@ -168,6 +217,10 @@ ipcMain.handle(
   }
 );
 
+ipcMain.handle('get-store', (_event, { key }) => {
+  return store.get(key);
+});
+
 /**
  * Add event listeners...
  */
@@ -179,7 +232,16 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.whenReady().then(createWindow).catch(console.log);
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+});
+
+app
+  .whenReady()
+  .then(registerHotkey)
+  .then(createWindow)
+  .then(createTray)
+  .catch(console.log);
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
