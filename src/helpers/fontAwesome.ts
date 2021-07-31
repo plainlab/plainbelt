@@ -15,10 +15,11 @@ import {
   faExchangeAlt,
   faQrcode,
   faImage,
-  faDownload,
+  faArrowDown,
   faSearch,
   faTimesCircle,
   faRobot,
+  faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -35,9 +36,10 @@ library.add(
   faRegistered,
   faCamera,
   faImage,
-  faDownload,
+  faArrowDown,
   faSearch,
   faTimesCircle,
   faRobot,
-  faCamera
+  faCamera,
+  faTrashAlt
 );
