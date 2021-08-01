@@ -15,6 +15,7 @@ import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
 import Auto from './auto/Auto';
+import PdfEditor from './pdf/PdfEditor';
 
 const defaultRoutes = [
   {
@@ -82,6 +83,12 @@ const defaultRoutes = [
     path: '/sql-formatter',
     name: 'SQL Formatter',
     Component: SqlFormatter,
+  },
+  {
+    icon: <FontAwesomeIcon icon={['far', 'file-pdf']} />,
+    path: '/pdf-editor',
+    name: 'Pdf Editor',
+    Component: PdfEditor,
   },
 ];
 
