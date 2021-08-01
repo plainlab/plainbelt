@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { ipcRenderer } from 'electron';
 
-const PdfEditor = () => {
+const PdfAnnotate = () => {
   const [pdfFile, setPdfFile] = useState('');
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [opening, setOpening] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const handleOpen = async () => {
     setOpening(true);
@@ -18,6 +19,7 @@ const PdfEditor = () => {
 
   const onDocumentLoadSuccess = ({ numPages: n }: { numPages: number }) => {
     setNumPages(n);
+    setLoaded(true);
   };
 
   return (
@@ -39,27 +41,29 @@ const PdfEditor = () => {
         <Page pageNumber={pageNumber} />
       </Document>
 
-      <div className="flex items-center justify-between">
-        {pageNumber > 1 ? (
-          <button type="button" onClick={() => setPageNumber(pageNumber - 1)}>
-            &lt; Back
-          </button>
-        ) : (
-          <p />
-        )}
-        <p>
-          Page {pageNumber} of {numPages}
-        </p>
-        {pageNumber < numPages ? (
-          <button type="button" onClick={() => setPageNumber(pageNumber + 1)}>
-            Next &gt;
-          </button>
-        ) : (
-          <p />
-        )}
-      </div>
+      {loaded && (
+        <div className="flex items-center justify-between">
+          {pageNumber > 1 ? (
+            <button type="button" onClick={() => setPageNumber(pageNumber - 1)}>
+              &lt; Back
+            </button>
+          ) : (
+            <p />
+          )}
+          <p>
+            Page {pageNumber} of {numPages}
+          </p>
+          {pageNumber < numPages ? (
+            <button type="button" onClick={() => setPageNumber(pageNumber + 1)}>
+              Next &gt;
+            </button>
+          ) : (
+            <p />
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
-export default PdfEditor;
+export default PdfAnnotate;

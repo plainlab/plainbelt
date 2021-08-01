@@ -15,7 +15,7 @@ import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
 import Auto from './auto/Auto';
-import PdfEditor from './pdf/PdfEditor';
+import PdfAnnotate from './pdf/PdfAnnotate';
 
 const defaultRoutes = [
   {
@@ -86,9 +86,9 @@ const defaultRoutes = [
   },
   {
     icon: <FontAwesomeIcon icon={['far', 'file-pdf']} />,
-    path: '/pdf-editor',
-    name: 'Pdf Editor',
-    Component: PdfEditor,
+    path: '/pdf-annotate',
+    name: 'Pdf Annotate',
+    Component: PdfAnnotate,
   },
 ];
 
