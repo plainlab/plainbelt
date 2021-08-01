@@ -221,6 +221,10 @@ ipcMain.handle('get-store', (_event, { key }) => {
   return store.get(key);
 });
 
+ipcMain.handle('render-pdf', (_event, pdfFile: string, canvasData: string) => {
+  console.log('Render pdf for', pdfFile, canvasData);
+});
+
 /**
  * Add event listeners...
  */
