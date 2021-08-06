@@ -87,22 +87,22 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "plainbelt",
+      "owner": "plainlab",
       "repo": "plainbelt"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plainbelt/plainbelt.git"
+    "url": "git+https://github.com/plainlab/plainlab.git"
   },
   "author": {
-    "name": "PlainBelt Maintainers",
-    "email": "pb@manhtai.com",
-    "url": "https://plainbelt.github.io"
+    "name": "PlainLab",
+    "email": "plainlab@protonmail.com",
+    "url": "https://plainlab.github.io"
   },
   "license": "GPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/plainbelt/plainbelt/issues"
+    "url": "https://github.com/plainlab/plainbelt/issues"
   },
   "keywords": [
     "electron",
@@ -115,7 +115,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/plainbelt/plainbelt#readme",
+  "homepage": "https://github.com/plainlab/plainbelt#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {

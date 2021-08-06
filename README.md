@@ -1,4 +1,4 @@
-[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainbelt/plainbelt)
+[![Test](https://github.com/plainlab/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainlab/plainbelt/actions/workflows/test.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainlab/plainbelt)
 
 # PlainBelt
 
@@ -44,7 +44,7 @@
 
 ## Installation
 
-Download binary file for your system on the releases page: https://github.com/plainbelt/plainbelt/releases.
+Download binary file for your system on the releases page: https://github.com/plainlab/plainbelt/releases.
 
 ## Development setup
 
@@ -60,3 +60,7 @@ yarn package
 ```
 
 Checkout the `release` folder and enjoy!
+
+---
+
+&copy; 2021 PlainLab

@@ -10,7 +10,7 @@ const JsonFormatter = () => {
   const location = useLocation<LocationState>();
 
   const [input, setInput] = useState(
-    '{"name":"PlainBelt","url":"https://github.com/plainbelt/plainbelt"}'
+    '{"name":"PlainBelt","url":"https://github.com/plainlab/plainbelt"}'
   );
   const [output, setOutput] = useState('');
   const [opening, setOpening] = useState(false);
