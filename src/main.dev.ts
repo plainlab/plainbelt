@@ -26,8 +26,12 @@ import log from 'electron-log';
 import { FileFilter, IpcMainInvokeEvent } from 'electron/main';
 import fs from 'fs';
 import QRCode from 'qrcode';
+import { PDFDocument } from 'pdf-lib';
 import { promisify } from 'util';
 import MenuBuilder from './menu';
+
+const writeFile = promisify(fs.writeFile);
+const readFile = promisify(fs.readFile);
 
 const Store = require('electron-store');
 
@@ -188,7 +192,7 @@ ipcMain.handle(
       if (type === 'path') {
         content = fpath;
       } else {
-        content = await promisify(fs.readFile)(fpath);
+        content = await readFile(fpath);
       }
     }
     return content;
@@ -211,7 +215,7 @@ ipcMain.handle(
 
     if (!file || !file.filePath) return;
 
-    await promisify(fs.writeFile)(file.filePath, content, {
+    await writeFile(file.filePath, content, {
       encoding,
     });
   }
@@ -220,6 +224,50 @@ ipcMain.handle(
 ipcMain.handle('get-store', (_event, { key }) => {
   return store.get(key);
 });
+
+interface CanvasObject {
+  text: string;
+  type: string;
+  top: number;
+  left: number;
+  fontSize: number;
+}
+
+interface Canvas {
+  objects: CanvasObject[];
+}
+
+ipcMain.handle(
+  'render-pdf',
+  async (_event, pdfFile: string, canvas: Canvas) => {
+    const pdfBuff = await readFile(pdfFile);
+    const pdfDoc = await PDFDocument.load(pdfBuff);
+
+    const pages = pdfDoc.getPages();
+    const firstPage = pages[0];
+
+    const { height } = firstPage.getSize();
+
+    canvas.objects.forEach((obj: CanvasObject) => {
+      if (obj.type === 'text') {
+        firstPage.drawText(obj.text, {
+          x: obj.left,
+          y: height - obj.top,
+          size: obj.fontSize,
+        });
+      }
+    });
+
+    const file = await dialog.showSaveDialog({
+      filters: [{ name: 'PDF Files', extensions: ['pdf'] }],
+    });
+
+    if (!file || !file.filePath) return;
+
+    const pdfBytes = await pdfDoc.save();
+    await writeFile(file.filePath, pdfBytes);
+  }
+);
 
 /**
  * Add event listeners...
