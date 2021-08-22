@@ -1,12 +1,12 @@
 {
   "name": "plainbelt",
   "productName": "PlainBelt",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A plain toolbelt for developers",
   "main": "./main.prod.js",
   "author": {
     "name": "PlainLab",
-    "email": "plainlab@protonmail.com",
+    "email": "plain@manhtai.com",
     "url": "https://github.com/plainlab"
   },
   "scripts": {
