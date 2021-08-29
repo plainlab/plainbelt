@@ -38,6 +38,5 @@ library.add(
   faCamera,
   faKey,
   faCheckCircle,
-  faRobot,
-  faCamera
+  faRobot
 );

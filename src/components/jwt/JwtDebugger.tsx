@@ -39,7 +39,7 @@ const JwtDebugger = () => {
 
   // for opening files
   const [opening, setOpening] = useState(false);
-  // for copying files
+  // for copying payload
   const [copied, setCopied] = useState(false);
 
   const formatForDisplay = (json: JwtHeader | JwtPayload) =>
