@@ -12,11 +12,16 @@ import {
   JwtHeader,
   Secret,
 } from 'jsonwebtoken';
+import { useLocation } from 'react-router-dom';
 
+interface LocationState {
+  input1: string;
+}
 const jwtInputPlaceHolder =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.keH6T3x1z7mmhKL1T3r9sQdAxxdzB6siemGMr_6ZOwU';
 
 const JwtDebugger = () => {
+  const location = useLocation<LocationState>();
   const [jwtInput, setJwtInput] = useState(jwtInputPlaceHolder);
   const [header, setHeader] = useState<JwtHeader>({
     alg: 'HS256',
@@ -43,24 +48,7 @@ const JwtDebugger = () => {
   const decodeJWT = (token: string) => decode(token, { complete: true });
 
   const handleJwtInputChanged = (evt: { target: { value: string } }) => {
-    const input = evt.target.value;
-    setJwtInput(input);
-    try {
-      const jwt = decodeJWT(input);
-      if (jwt) {
-        if (!_isEqual(jwt.header, header)) setHeader(jwt.header);
-        if (!_isEqual(jwt.payload, payload)) setPayload(jwt.payload);
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-alert
-      alert(e.message);
-    }
-    try {
-      verify(input, secret, { algorithms: [algorithm] });
-      setVerifyError(false);
-    } catch (e) {
-      setVerifyError(true);
-    }
+    setJwtInput(evt.target.value);
   };
 
   useEffect(() => {
@@ -73,6 +61,32 @@ const JwtDebugger = () => {
       setVerifyError(true);
     }
   }, [payload, secret, algorithm, header]);
+
+  useEffect(() => {
+    try {
+      const jwt = decodeJWT(jwtInput);
+      if (jwt) {
+        if (!_isEqual(jwt.header, header)) setHeader(jwt.header);
+        if (!_isEqual(jwt.payload, payload)) setPayload(jwt.payload);
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-alert
+      alert(e.message);
+    }
+    try {
+      verify(jwtInput, secret, { algorithms: [algorithm] });
+      setVerifyError(false);
+    } catch (e) {
+      setVerifyError(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [jwtInput]);
+
+  useEffect(() => {
+    if (location.state && location.state.input1) {
+      setJwtInput(location.state.input1);
+    }
+  }, [location]);
 
   const handleChangePayload = (evt: { target: { value: string } }) => {
     try {
@@ -148,11 +162,11 @@ const JwtDebugger = () => {
         <span className="flex space-x-4">
           <button
             type="button"
-            className="w-16 btn"
+            className="btn"
             onClick={handleCopyOutput}
             disabled={copied}
           >
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? 'Copied' : 'Copy Payload'}
           </button>
         </span>
       </div>
@@ -160,7 +174,7 @@ const JwtDebugger = () => {
         <section className="flex flex-col flex-1">
           <div className="flex items-center mb-2">
             <h4 className="inline text-xl font-bold">Encoded</h4>
-            <span className="ml-2 text-gray-500">Paste a token here</span>
+            <span className="ml-2 text-gray-400">Paste a token here</span>
             <span
               className={classNames({
                 'ml-auto space-x-1': true,
@@ -175,8 +189,8 @@ const JwtDebugger = () => {
             </span>
           </div>
           <textarea
-            onChange={handleJwtInputChanged}
             className="flex-1 min-h-full p-2 bg-white rounded-md"
+            onChange={handleJwtInputChanged}
             value={jwtInput}
             disabled={opening}
           />
@@ -184,45 +198,58 @@ const JwtDebugger = () => {
         <section className="flex flex-col flex-1">
           <div className="flex items-center mb-2">
             <h4 className="inline text-xl font-bold">Decoded</h4>
-            <span className="ml-2 text-gray-500">
+            <span className="ml-2 text-gray-400">
               View the payload and edit the secret
             </span>
-            <input
-              onChange={handleChangeSecret}
-              placeholder="signature"
-              className="flex-1 px-2 py-1 bg-white rounded-md"
-              value={secret.toString()}
-            />
-            <select
-              className="ml-auto"
-              name="algorithm"
-              id="algorithm"
-              onChange={handleChangeAlgorithm}
-              value={algorithm}
-            >
-              <option value="HS256">HS256</option>
-              <option value="HS384">HS384</option>
-              <option value="HS512">HS512</option>
-            </select>
           </div>
-          <div className="flex-1 min-h-full p-2 bg-gray-100 rounded-md">
-            <div>
-              <p>Header:</p>
+          <div className="flex-1 p-2 bg-gray-100 rounded-md">
+            <div className="mb-4">
+              <p className="mb-2">
+                Header:
+                <span className="text-gray-400 ml-1">
+                  ALGORITHM & TOKEN TYPE
+                </span>
+              </p>
               <textarea
+                className="flex-1 h-40 p-2 w-full rounded-md"
                 onChange={handleChangeHeader}
-                className="flex-1 h-40 p-2"
                 value={formatForDisplay(header)}
                 disabled={opening}
               />
             </div>
-            <div>
-              <p>Payload:</p>
+            <div className="mb-4">
+              <p className="mb-2">
+                Payload: <span className="text-gray-400 ml-1">DATA</span>
+              </p>
               <textarea
+                className="flex-1 h-40 p-2 w-full rounded-md"
                 onChange={handleChangePayload}
-                className="flex-1 h-40 p-2"
                 value={formatForDisplay(payload)}
                 disabled={opening}
               />
+            </div>
+            <div className="mb-4">
+              <p className="mb-2">Secret:</p>
+              <input
+                className="flex-1 px-2 py-1 bg-white rounded-md w-full"
+                onChange={handleChangeSecret}
+                placeholder="Secret"
+                value={secret.toString()}
+              />
+            </div>
+            <div className="mb-4">
+              <p className="mb-2">Algorithm:</p>
+              <select
+                className="p-2 cursor-pointer rounded-md"
+                name="algorithm"
+                id="algorithm"
+                onChange={handleChangeAlgorithm}
+                value={algorithm}
+              >
+                <option value="HS256">HS256</option>
+                <option value="HS384">HS384</option>
+                <option value="HS512">HS512</option>
+              </select>
             </div>
           </div>
         </section>
