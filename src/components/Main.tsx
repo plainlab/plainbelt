@@ -13,6 +13,7 @@ import SqlFormatter from './sql/SqlFormatter';
 import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
+import JwtDebugger from './jwt/JwtDebugger';
 import Auto from './auto/Auto';
 
 const defaultRoutes = [
@@ -81,6 +82,12 @@ const defaultRoutes = [
     path: '/sql-formatter',
     name: 'SQL Formatter',
     Component: SqlFormatter,
+  },
+  {
+    icon: <FontAwesomeIcon icon="key" />,
+    path: '/jwt-debugger',
+    name: 'JWT Debugger',
+    Component: JwtDebugger,
   },
 ];
 
