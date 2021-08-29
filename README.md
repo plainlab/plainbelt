@@ -1,15 +1,15 @@
-[![Test](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainbelt/plainbelt/actions/workflows/test.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainbelt/plainbelt)
+[![Test](https://github.com/plainlab/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainlab/plainbelt/actions/workflows/test.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainlab/plainbelt)
 
 # PlainBelt
 
-> A toolbelt for your plain text
+> Plain toolbelt for developers. Work offline. Cross-platform.
 
 ## Features
 
 - [x] Multiple plain text tools
 - [x] Tray icon
 - [x] Clipboard auto detection
-- [ ] Global hotkey
+- [x] Global hotkey (Control+Alt+Meta+Space for now)
 
 ## Tools list
 
@@ -44,7 +44,11 @@
 
 ## Installation
 
-Download binary file for your system on the releases page: https://github.com/plainbelt/plainbelt/releases.
+Download binary file for your system on the releases page: https://github.com/plainlab/plainbelt/releases.
+
+- macOS: Get `.dmg` file, open it and drag the app into Applications folder, for M1 mac: get `arm64.dmg` file instead.
+- Windows: Get `.exe` file and open it to install.
+- Linux: Get `.AppImage` file to install, for ARM laptop: get `arm64.AppImage` file instead.
 
 ## Development setup
 
@@ -60,3 +64,7 @@ yarn package
 ```
 
 Checkout the `release` folder and enjoy!
+
+---
+
+&copy; 2021 PlainLab

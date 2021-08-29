@@ -18,6 +18,7 @@ import {
   faTimesCircle,
   faKey,
   faCheckCircle,
+  faRobot,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -36,5 +37,7 @@ library.add(
   faTimesCircle,
   faCamera,
   faKey,
-  faCheckCircle
+  faCheckCircle,
+  faRobot,
+  faCamera
 );

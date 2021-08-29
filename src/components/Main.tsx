@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
 
+import { ipcRenderer } from 'electron';
 import MarkdownToHtml from './markdown/MarkdownToHtml';
 import UnixTimestamp from './timestamp/UnixTimestamp';
 import HtmlPreview from './html/HtmlPreview';
@@ -18,9 +19,9 @@ import Auto from './auto/Auto';
 
 const defaultRoutes = [
   {
-    icon: <FontAwesomeIcon icon="database" />,
+    icon: <FontAwesomeIcon icon="robot" />,
     path: '/auto',
-    name: 'PlainBelt',
+    name: 'Auto Detection',
     Component: Auto,
   },
   {
@@ -94,20 +95,23 @@ const defaultRoutes = [
 const Main = () => {
   const [routes, setRoutes] = useState(defaultRoutes);
   const [search, setSearch] = useState('');
+  const history = useHistory();
 
   const handleSearch = (e: { target: { value: string } }) => {
     setSearch(e.target.value);
   };
 
+  ipcRenderer.on('hotkey-pressed', () => {
+    history.push('/auto', { auto: true });
+  });
+
   useEffect(() => {
     if (search.trim()) {
       setRoutes(
-        defaultRoutes
-          .slice(1)
-          .filter(({ name }) => name.match(new RegExp(search, 'gi')))
+        defaultRoutes.filter(({ name }) => name.match(new RegExp(search, 'gi')))
       );
     } else {
-      setRoutes(defaultRoutes.slice(1));
+      setRoutes(defaultRoutes);
     }
   }, [search]);
 

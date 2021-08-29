@@ -61,8 +61,6 @@ export default class MenuBuilder {
           selector: 'orderFrontStandardAboutPanel:',
         },
         { type: 'separator' },
-        { label: 'Services', submenu: [] },
-        { type: 'separator' },
         {
           label: 'Hide PlainBelt',
           accelerator: 'Command+H',
@@ -157,13 +155,13 @@ export default class MenuBuilder {
         {
           label: 'Home Page',
           click() {
-            shell.openExternal('https://plainbelt.github.io');
+            shell.openExternal('https://plainlab.github.io');
           },
         },
         {
           label: 'GitHub',
           click() {
-            shell.openExternal('https://github.com/plainbelt/plainbelt');
+            shell.openExternal('https://github.com/plainlab/plainbelt');
           },
         },
       ],
@@ -244,13 +242,13 @@ export default class MenuBuilder {
           {
             label: 'Home Page',
             click() {
-              shell.openExternal('https://plainbelt.github.io');
+              shell.openExternal('https://plainlab.github.io');
             },
           },
           {
             label: 'GitHub',
             click() {
-              shell.openExternal('https://github.com/plainbelt/plainbelt');
+              shell.openExternal('https://github.com/plainlab/plainbelt');
             },
           },
         ],

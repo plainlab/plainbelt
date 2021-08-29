@@ -3,17 +3,21 @@ import React, { useState } from 'react';
 import { useDebouncedEffect } from '../../helpers/effectHooks';
 
 const QRCodeGenerator = () => {
-  const [content, setContent] = useState('https://plainbelt.github.io');
+  const [content, setContent] = useState('https://plainlab.github.io');
   const [qrCode, setQrCode] = useState();
   const [opening, setOpening] = useState(false);
   const [saving, setSaving] = useState(false);
 
   useDebouncedEffect(
     () => {
+      let isMounted = true;
       ipcRenderer
         .invoke('generate-qrcode', { content })
-        .then((qr) => setQrCode(qr))
+        .then((qr) => isMounted && setQrCode(qr))
         .catch(() => {});
+      return () => {
+        isMounted = false;
+      };
     },
     [content],
     500

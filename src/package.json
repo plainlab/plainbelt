@@ -1,13 +1,13 @@
 {
   "name": "plainbelt",
-  "productName": "plainbelt",
-  "version": "0.0.5",
-  "description": "A toolbelt for all your plain text",
+  "productName": "PlainBelt",
+  "version": "0.0.11",
+  "description": "A plain toolbelt for developers",
   "main": "./main.prod.js",
   "author": {
-    "name": "PlainBelt Maintainers",
-    "email": "pb@manhtai.com",
-    "url": "https://github.com/plainbelt"
+    "name": "PlainLab",
+    "email": "plain@manhtai.com",
+    "url": "https://github.com/plainlab"
   },
   "scripts": {
     "electron-rebuild": "node -r ../.erb/scripts/BabelRegister.js ../.erb/scripts/ElectronRebuild.js",
