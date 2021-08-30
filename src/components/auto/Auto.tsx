@@ -1,6 +1,7 @@
 import { clipboard, ipcRenderer } from 'electron';
 import path from 'path';
 import React, { useEffect, useState } from 'react';
+import { decode } from 'jsonwebtoken';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const detectRouteData = (value: string) => {
@@ -15,6 +16,15 @@ const detectRouteData = (value: string) => {
   try {
     if (typeof JSON.parse(value) === 'object') {
       return { route: '/json-formatter', state: { input1: value } };
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  try {
+    const validJwt = decode(value);
+    if (validJwt) {
+      return { route: '/jwt-debugger', state: { input1: value } };
     }
   } catch (e) {
     // ignore

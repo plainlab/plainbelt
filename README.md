@@ -23,7 +23,7 @@
 - [x] JSON Formatter
 - [x] SQL Formatter
 - [x] Regex Tester
-- [ ] JWT Debugger
+- [x] JWT Debugger
 - [ ] Number Base Converter
 - [ ] URL Encode/Decode
 - [ ] HTML Entity Encode/Decode
