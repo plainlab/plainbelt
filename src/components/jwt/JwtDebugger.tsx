@@ -145,7 +145,7 @@ const JwtDebugger = () => {
 
   return (
     <div className="flex flex-col min-h-full">
-      <div className="flex justify-between mb-2">
+      <div className="flex justify-between mb-1">
         <span className="flex space-x-2">
           <button type="button" className="btn" onClick={handleClipboardInput}>
             Clipboard
@@ -159,35 +159,21 @@ const JwtDebugger = () => {
             Open...
           </button>
         </span>
-        <span className="flex space-x-4">
-          <button
-            type="button"
-            className="btn"
-            onClick={handleCopyOutput}
-            disabled={copied}
-          >
-            {copied ? 'Copied' : 'Copy Payload'}
-          </button>
+        <span
+          className={classNames({
+            'ml-auto space-x-1': true,
+            'text-green-500': !verifyError,
+            'text-red-500': verifyError,
+          })}
+        >
+          <FontAwesomeIcon icon="check-circle" />
+          <span>
+            {verifyError ? 'Invalid Signature' : 'Signature verified'}
+          </span>
         </span>
       </div>
       <div className="flex flex-1 min-h-full space-x-4">
         <section className="flex flex-col flex-1">
-          <div className="flex items-center mb-2">
-            <h4 className="inline text-xl font-bold">Encoded</h4>
-            <span className="ml-2 text-gray-400">Paste a token here</span>
-            <span
-              className={classNames({
-                'ml-auto space-x-1': true,
-                'text-green-500': !verifyError,
-                'text-red-500': verifyError,
-              })}
-            >
-              <FontAwesomeIcon icon="check-circle" />
-              <span>
-                {verifyError ? 'Invalid Signature' : 'Signature verified'}
-              </span>
-            </span>
-          </div>
           <textarea
             className="flex-1 min-h-full p-2 bg-white rounded-md"
             onChange={handleJwtInputChanged}
@@ -196,51 +182,50 @@ const JwtDebugger = () => {
           />
         </section>
         <section className="flex flex-col flex-1">
-          <div className="flex items-center mb-2">
-            <h4 className="inline text-xl font-bold">Decoded</h4>
-            <span className="ml-2 text-gray-400">
-              View the payload and edit the secret
-            </span>
-          </div>
           <div className="flex-1 p-2 bg-gray-100 rounded-md">
             <div className="mb-4">
-              <p className="mb-2">
-                Header:
-                <span className="text-gray-400 ml-1">
-                  ALGORITHM & TOKEN TYPE
-                </span>
-              </p>
+              <p className="mb-1">Header:</p>
               <textarea
-                className="flex-1 h-40 p-2 w-full rounded-md"
+                className="flex-1 w-full h-40 p-2 rounded-md"
                 onChange={handleChangeHeader}
                 value={formatForDisplay(header)}
                 disabled={opening}
               />
             </div>
             <div className="mb-4">
-              <p className="mb-2">
-                Payload: <span className="text-gray-400 ml-1">DATA</span>
-              </p>
+              <section className="flex items-center justify-between mb-1">
+                <p>Payload:</p>
+                <span className="flex space-x-4">
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={handleCopyOutput}
+                    disabled={copied}
+                  >
+                    {copied ? 'Copied' : 'Copy'}
+                  </button>
+                </span>
+              </section>
               <textarea
-                className="flex-1 h-40 p-2 w-full rounded-md"
+                className="flex-1 w-full h-40 p-2 rounded-md"
                 onChange={handleChangePayload}
                 value={formatForDisplay(payload)}
                 disabled={opening}
               />
             </div>
             <div className="mb-4">
-              <p className="mb-2">Secret:</p>
+              <p className="mb-1">Secret:</p>
               <input
-                className="flex-1 px-2 py-1 bg-white rounded-md w-full"
+                className="flex-1 w-full px-2 py-1 bg-white rounded-md"
                 onChange={handleChangeSecret}
                 placeholder="Secret"
                 value={secret.toString()}
               />
             </div>
             <div className="mb-4">
-              <p className="mb-2">Algorithm:</p>
+              <p className="mb-1">Algorithm:</p>
               <select
-                className="p-2 cursor-pointer rounded-md"
+                className="p-2 rounded-md cursor-pointer"
                 name="algorithm"
                 id="algorithm"
                 onChange={handleChangeAlgorithm}
