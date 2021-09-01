@@ -42,7 +42,7 @@ const JsNotebook = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-full">
+    <div className="flex flex-col flex-shrink-0 h-full min-h-full">
       <div className="flex justify-between mb-1">
         <span className="flex space-x-4">
           <span className="flex space-x-2">
@@ -78,10 +78,10 @@ const JsNotebook = () => {
           </button>
         </span>
       </div>
-      <div className="relative flex flex-1 min-h-full space-x-2">
+      <div className="flex flex-col flex-1 h-full space-y-2 overflow-auto">
         <CodeMirror
           autoCursor={false}
-          className="flex-1 min-h-full text-base"
+          className="flex-1 overflow-auto text-base"
           value={content}
           options={{
             theme: 'elegant',
@@ -93,7 +93,7 @@ const JsNotebook = () => {
           }}
         />
         <textarea
-          className="flex-shrink-0 min-h-full p-2 bg-gray-100 rounded-md"
+          className="flex-shrink-0 p-2 bg-gray-100 rounded-md"
           value={output}
           readOnly
         />

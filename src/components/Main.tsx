@@ -133,7 +133,7 @@ const Main = () => {
     <div className="absolute inset-0 flex flex-col overflow-hidden">
       <main className="relative flex flex-1 min-h-0">
         {/* Left sidebar */}
-        <nav className="flex flex-col w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
+        <nav className="flex flex-col flex-shrink-0 w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
           {/* Search */}
           <div className="flex items-center px-2 mx-3 mt-6 space-x-1 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600 focus-within:ring-2 focus-within:ring-blue-500">
             <FontAwesomeIcon icon="search" />
