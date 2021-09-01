@@ -16,6 +16,7 @@ import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
 import JwtDebugger from './jwt/JwtDebugger';
 import Auto from './auto/Auto';
+import CronEditor from './cron/Cron';
 
 const defaultRoutes = [
   {
@@ -29,6 +30,12 @@ const defaultRoutes = [
     path: '/unix-converter',
     name: 'Unix Time Converter',
     Component: UnixTimestamp,
+  },
+  {
+    icon: <FontAwesomeIcon icon="retweet" />,
+    path: '/cron-editor',
+    name: 'Cron Editor',
+    Component: CronEditor,
   },
   {
     icon: <FontAwesomeIcon icon="registered" />,
