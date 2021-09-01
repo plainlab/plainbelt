@@ -38,12 +38,6 @@ const JsNotebook = () => {
     setContent(clipboard.readText());
   };
 
-  const handleCopy = () => {
-    setCopied(true);
-    clipboard.write({ text: output });
-    setTimeout(() => setCopied(false), 500);
-  };
-
   const handleRun = () => {
     setRunning(true);
     try {
