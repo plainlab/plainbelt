@@ -17,6 +17,7 @@ import RegexTester from './regex/RegexTester';
 import JwtDebugger from './jwt/JwtDebugger';
 import Auto from './auto/Auto';
 import CronEditor from './cron/Cron';
+import JsNotebook from './notebook/JavaScript';
 
 const defaultRoutes = [
   {
@@ -96,6 +97,12 @@ const defaultRoutes = [
     path: '/jwt-debugger',
     name: 'JWT Debugger',
     Component: JwtDebugger,
+  },
+  {
+    icon: <FontAwesomeIcon icon={['fab', 'js']} />,
+    path: '/js-console',
+    name: 'Js Console',
+    Component: JsNotebook,
   },
 ];
 

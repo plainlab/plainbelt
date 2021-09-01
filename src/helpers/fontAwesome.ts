@@ -4,6 +4,7 @@ import {
   faMarkdown,
   faHtml5,
   faJsSquare,
+  faJs,
 } from '@fortawesome/free-brands-svg-icons';
 import {
   faCamera,
@@ -40,5 +41,6 @@ library.add(
   faKey,
   faCheckCircle,
   faRobot,
-  faRetweet
+  faRetweet,
+  faJs
 );
