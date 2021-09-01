@@ -133,9 +133,9 @@ const createWindow = async () => {
 };
 
 const getIcon = () => {
-  if (process.platform === 'win32') return '16x16.png';
-  if (nativeTheme.shouldUseDarkColors) return '16x16.png';
-  return '16x16.png';
+  if (process.platform === 'win32') return 'tray.png';
+  if (nativeTheme.shouldUseDarkColors) return 'tray.png';
+  return 'tray.png';
 };
 
 const showWindow = async () => {
@@ -146,7 +146,7 @@ const showWindow = async () => {
 };
 
 const createTray = async () => {
-  tray = new Tray(path.join(__dirname, '../assets/icons', getIcon()));
+  tray = new Tray(path.join(__dirname, '../assets', getIcon()));
   tray.on('click', showWindow);
   tray.setToolTip('PlainBelt');
 };

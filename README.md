@@ -35,6 +35,10 @@
 
 ![Unix](./.erb/assets/unix.png)
 
+### Cron Editor
+
+![Cron](./.erb/assets/cron.png)
+
 ### Regex Tester
 
 ![Regex](./.erb/assets/regex.png)

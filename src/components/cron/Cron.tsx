@@ -3,9 +3,24 @@ import { clipboard } from 'electron';
 import cronstrue from 'cronstrue';
 import classNames from 'classnames';
 
+const defaultCron = '29 8 * * *';
+const examples = [
+  '* * * * * *',
+  '* * * * *',
+  '0 * * * *',
+  '0 */12 * * *',
+  '0 0 * * MON',
+  '0 0 * * 6,0',
+  '0 0 1 * *',
+  '0 0 1 1 *',
+  '0 0 1 */3 *',
+  '0 0 1 */6 *',
+  '0 0 1 1 *',
+];
+
 const CronEditor = () => {
-  const [input, setInput] = useState('* * * * *');
-  const [output, setOutput] = useState(cronstrue.toString('* * * * *'));
+  const [input, setInput] = useState(defaultCron);
+  const [output, setOutput] = useState(cronstrue.toString(defaultCron));
   const [inputErr, setInputErr] = useState(false);
 
   const handleChangeInput = (evt: { target: { value: string } }) =>
@@ -42,23 +57,24 @@ const CronEditor = () => {
           <div className="flex items-center space-x-2">
             <input
               onChange={handleChangeInput}
-              className="flex-1 px-2 py-1 text-lg text-center bg-white rounded-md"
+              className="flex-1 px-2 py-1 text-center bg-white rounded-md"
               value={input}
             />
           </div>
         </section>
         <section
           className={classNames({
-            'flex flex-col flex-shrink-0 text-center text-lg': true,
+            'flex flex-col flex-shrink-0 text-center text-base': true,
             'text-blue-500': !inputErr,
             'text-red-500': inputErr,
           })}
         >
-          {!inputErr && '“'}
+          {!inputErr && '"'}
           {output}
-          {!inputErr && '”'}
+          {!inputErr && '"'}
         </section>
-        <section className="flex flex-col items-center justify-start flex-1 opacity-70">
+        <section className="flex flex-col items-start justify-start flex-shrink-0 pt-2 space-y-4 border-t border-gray-300 opacity-70">
+          <p className="italic">Rules:</p>
           <table>
             <tbody>
               <tr className="flex space-x-4">
@@ -77,6 +93,23 @@ const CronEditor = () => {
                 <th>/</th>
                 <td>step values</td>
               </tr>
+            </tbody>
+          </table>
+        </section>
+        <section className="flex flex-col items-start justify-start flex-shrink-0 pt-2 space-y-4 border-t border-gray-300 opacity-70">
+          <p className="italic">Examples:</p>
+          <table>
+            <tbody>
+              {examples.map((c) => (
+                <tr
+                  className="flex space-x-4 cursor-pointer"
+                  key={c}
+                  onClick={() => setInput(c)}
+                >
+                  <th className="w-32 text-left">{c}</th>
+                  <td>{cronstrue.toString(c)}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </section>
