@@ -25,9 +25,7 @@
 - [x] SQL Formatter
 - [x] Regex Tester
 - [x] JWT Debugger
-- [ ] Number Base Converter
-- [ ] URL Encode/Decode
-- [ ] HTML Entity Encode/Decode
+- [x] Js Console
 
 ## Demo
 
