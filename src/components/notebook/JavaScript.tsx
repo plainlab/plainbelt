@@ -1,15 +1,29 @@
+/* eslint-disable no-eval */
 import React, { useState } from 'react';
 import { ipcRenderer, clipboard } from 'electron';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 
 require('codemirror/mode/javascript/javascript');
 
+const fib = `const fibonacci = (n) => {
+  const fibs = []
+
+  fibs[0] = 0
+  fibs[1] = 1
+  for (let i = 2; i <= n; i++) {
+    fibs[i] = fibs[i - 2] + fibs[i - 1]
+  }
+
+  return fibs[n]
+}
+
+fibonacci(10)`;
+
 const JsNotebook = () => {
-  const [content, setContent] = useState('1 + 1');
-  const [output, setOutput] = useState('2');
+  const [content, setContent] = useState(fib);
+  const [output, setOutput] = useState(eval(fib));
 
   const [opening, setOpening] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [running, setRunning] = useState(false);
 
   const handleOpen = async () => {
@@ -33,7 +47,6 @@ const JsNotebook = () => {
   const handleRun = () => {
     setRunning(true);
     try {
-      // eslint-disable-next-line no-eval
       setOutput(eval(content));
     } catch (e) {
       setOutput(e.message);
@@ -67,14 +80,6 @@ const JsNotebook = () => {
             disabled={running}
           >
             {running ? 'Running' : 'Run'}
-          </button>
-          <button
-            type="button"
-            className="w-16 btn"
-            onClick={handleCopy}
-            disabled={copied}
-          >
-            {copied ? 'Copied' : 'Copy'}
           </button>
         </span>
       </div>
