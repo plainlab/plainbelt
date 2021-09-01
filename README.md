@@ -14,6 +14,7 @@
 ## Tools list
 
 - [x] Unix Timestamp Converter
+- [x] Cron Editor
 - [x] Markdown to HTML Converter
 - [x] HTML Preview
 - [x] QRCode Generator
