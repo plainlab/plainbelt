@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ComponentType, ReactElement, useEffect, useState } from 'react';
 import { NavLink, Route, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
@@ -20,12 +20,15 @@ import Auto from './auto/Auto';
 import CronEditor from './cron/Cron';
 import JsConsole from './notebook/JavaScript';
 
-interface Item {
+interface MenuItem {
   path: string;
+  name: string;
   show: boolean;
+  icon: ReactElement<any, any>;
+  Component: ComponentType;
 }
 
-const defaultRoutes = [
+const defaultRoutes: MenuItem[] = [
   {
     icon: <FontAwesomeIcon icon="robot" />,
     path: '/auto',
@@ -127,8 +130,8 @@ const defaultRoutes = [
 ];
 
 const Main = () => {
-  const [allRoutes, setAllRoutes] = useState(defaultRoutes);
-  const [routes, setRoutes] = useState(allRoutes);
+  const [allRoutes, setAllRoutes] = useState<MenuItem[]>([]);
+  const [routes, setRoutes] = useState<MenuItem[]>([]);
   const [search, setSearch] = useState('');
   const [editMenu, setEditMenu] = useState(false);
   const history = useHistory();
@@ -154,17 +157,39 @@ const Main = () => {
   }, [search, editMenu]);
 
   useEffect(() => {
-    const routeMap: Record<string, Item> = allRoutes.reduce(
-      (a, b) => ({ ...a, [b.path]: b }),
+    const routeMap: Record<string, boolean> = allRoutes.reduce(
+      (a, b) => ({ ...a, [b.path]: b.show }),
       {}
     );
-    setRoutes(
-      routes.map((r) => ({
-        ...r,
-        show: routeMap[r.path] && routeMap[r.path].show,
-      }))
-    );
+    setRoutes(allRoutes.filter((r) => editMenu || routeMap[r.path]));
+
+    if (allRoutes.length) {
+      ipcRenderer.invoke('set-store', { key: 'left-menu', value: routeMap });
+    }
   }, [allRoutes]);
+
+  useEffect(() => {
+    const routeMap: Record<string, boolean> = defaultRoutes.reduce(
+      (a, b) => ({ ...a, [b.path]: b.show }),
+      {}
+    );
+    ipcRenderer
+      .invoke('get-store', { key: 'left-menu' })
+      .then((map) => {
+        if (map) {
+          const routeList = defaultRoutes.map((r) => ({
+            ...r,
+            show:
+              map[r.path] === true || map[r.path] === false
+                ? map[r.path]
+                : routeMap[r.path],
+          }));
+          setAllRoutes(routeList);
+        }
+        return null;
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="absolute inset-0 flex flex-col overflow-hidden">
@@ -228,7 +253,7 @@ const Main = () => {
                         )
                       )
                     }
-                    className="w-4 h-4 mr-1 rounded cursor-pointer"
+                    className="w-4 h-4 rounded cursor-pointer"
                   />
                 )}
               </section>
