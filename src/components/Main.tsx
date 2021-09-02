@@ -17,6 +17,7 @@ import RegexTester from './regex/RegexTester';
 import JwtDebugger from './jwt/JwtDebugger';
 import Auto from './auto/Auto';
 import CronEditor from './cron/Cron';
+import JsConsole from './notebook/JavaScript';
 
 const defaultRoutes = [
   {
@@ -97,6 +98,12 @@ const defaultRoutes = [
     name: 'JWT Debugger',
     Component: JwtDebugger,
   },
+  {
+    icon: <FontAwesomeIcon icon={['fab', 'js']} />,
+    path: '/js-console',
+    name: 'Js Console',
+    Component: JsConsole,
+  },
 ];
 
 const Main = () => {
@@ -126,7 +133,7 @@ const Main = () => {
     <div className="absolute inset-0 flex flex-col overflow-hidden">
       <main className="relative flex flex-1 min-h-0">
         {/* Left sidebar */}
-        <nav className="flex flex-col w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
+        <nav className="flex flex-col flex-shrink-0 w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
           {/* Search */}
           <div className="flex items-center px-2 mx-3 mt-6 space-x-1 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600 focus-within:ring-2 focus-within:ring-blue-500">
             <FontAwesomeIcon icon="search" />
@@ -166,7 +173,7 @@ const Main = () => {
         </nav>
 
         {/* Main content */}
-        <section className="relative flex flex-col w-full bg-gray-200">
+        <section className="relative flex flex-col w-3/4 bg-gray-200">
           <div className="h-full px-6 my-6 overflow-x-hidden overflow-y-auto">
             {defaultRoutes.map(({ path, name, Component }) => (
               <Route key={path} exact path={path}>
