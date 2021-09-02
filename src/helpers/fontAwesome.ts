@@ -22,6 +22,7 @@ import {
   faRobot,
   faRetweet,
   faSlidersH,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -44,5 +45,6 @@ library.add(
   faRobot,
   faRetweet,
   faJs,
-  faSlidersH
+  faSlidersH,
+  faCheck
 );
