@@ -135,22 +135,29 @@ const Main = () => {
         {/* Left sidebar */}
         <nav className="flex flex-col flex-shrink-0 w-1/4 overflow-x-hidden overflow-y-auto bg-gray-300">
           {/* Search */}
-          <div className="flex items-center px-2 mx-3 mt-6 space-x-1 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600 focus-within:ring-2 focus-within:ring-blue-500">
-            <FontAwesomeIcon icon="search" />
-            <input
-              type="text"
-              className="w-full p-1 bg-gray-200 border-none rounded-r-md focus:ring-0"
-              value={search}
-              onChange={handleSearch}
-              placeholder="Search..."
-            />
-            {search && (
-              <FontAwesomeIcon
-                icon="times-circle"
-                onClick={() => setSearch('')}
+          <section className="flex items-center justify-between mx-3 mt-6 space-x-2">
+            <div className="flex items-center flex-1 px-2 text-gray-400 bg-gray-200 rounded-md focus-within:text-gray-600 focus-within:ring-2 focus-within:ring-blue-500">
+              <FontAwesomeIcon icon="search" className="mr-1" />
+              <input
+                type="text"
+                className="w-full p-1 bg-gray-200 border-none rounded-r-md focus:ring-0"
+                value={search}
+                onChange={handleSearch}
+                placeholder="Search..."
               />
-            )}
-          </div>
+              {search && (
+                <FontAwesomeIcon
+                  icon="times-circle"
+                  onClick={() => setSearch('')}
+                  className="mr-2 cursor-pointer"
+                />
+              )}
+              <FontAwesomeIcon
+                icon="sliders-h"
+                className="text-gray-400 cursor-pointer hover:text-gray-600"
+              />
+            </div>
+          </section>
 
           <div
             className="px-2 my-6"
