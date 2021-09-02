@@ -31,9 +31,7 @@ import MenuBuilder from './menu';
 
 const Store = require('electron-store');
 
-const store = new Store({
-  hotkey: String,
-});
+const store = new Store();
 
 export default class AppUpdater {
   constructor() {
@@ -218,8 +216,12 @@ ipcMain.handle(
   }
 );
 
-ipcMain.handle('get-store', (_event, { key }) => {
+ipcMain.handle('get-store', async (_event, { key }) => {
   return store.get(key);
+});
+
+ipcMain.handle('set-store', async (_event, { key, value }) => {
+  return store.set(key, value);
 });
 
 /**
