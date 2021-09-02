@@ -185,6 +185,8 @@ const Main = () => {
                 : routeMap[r.path],
           }));
           setAllRoutes(routeList);
+        } else {
+          setAllRoutes(defaultRoutes);
         }
         return null;
       })
