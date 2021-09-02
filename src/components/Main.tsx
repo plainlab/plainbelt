@@ -17,7 +17,7 @@ import RegexTester from './regex/RegexTester';
 import JwtDebugger from './jwt/JwtDebugger';
 import Auto from './auto/Auto';
 import CronEditor from './cron/Cron';
-import JsNotebook from './notebook/JavaScript';
+import JsConsole from './notebook/JavaScript';
 
 const defaultRoutes = [
   {
@@ -102,7 +102,7 @@ const defaultRoutes = [
     icon: <FontAwesomeIcon icon={['fab', 'js']} />,
     path: '/js-console',
     name: 'Js Console',
-    Component: JsNotebook,
+    Component: JsConsole,
   },
 ];
 
@@ -173,7 +173,7 @@ const Main = () => {
         </nav>
 
         {/* Main content */}
-        <section className="relative flex flex-col w-full bg-gray-200">
+        <section className="relative flex flex-col w-3/4 bg-gray-200">
           <div className="h-full px-6 my-6 overflow-x-hidden overflow-y-auto">
             {defaultRoutes.map(({ path, name, Component }) => (
               <Route key={path} exact path={path}>
