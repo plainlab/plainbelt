@@ -82,12 +82,16 @@ const Auto = () => {
           />
         </section>
         <p className="mt-4 text-lg font-bold">PlainBelt</p>
-        <a href="https://plainlab.github.io" className="opacity-50">
+        <a
+          href="https://plainlab.github.io"
+          target="new"
+          className="opacity-50"
+        >
           https://plainlab.github.io
         </a>
         {hotkey && (
           <p className="mt-10 opacity-70">
-            <em>Hotkey</em>: Control+Alt+Meta+Space (⌃⌥⌘Space in Mac)
+            <em>Hotkey</em>: Control+Alt+Meta+Space (⌃⌥⌘Space on Mac)
           </p>
         )}
       </section>
