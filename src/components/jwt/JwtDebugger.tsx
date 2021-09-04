@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import _isEqual from 'lodash.isequal';
+import _isEqual from 'lodash/isequal';
 import { ipcRenderer, clipboard } from 'electron';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

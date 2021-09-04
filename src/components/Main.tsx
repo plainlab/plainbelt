@@ -19,6 +19,8 @@ import JwtDebugger from './jwt/JwtDebugger';
 import Auto from './auto/Auto';
 import CronEditor from './cron/Cron';
 import JsConsole from './notebook/JavaScript';
+import HtmlEntityCodec from './html/HtmlEntityCodec';
+import UrlCodec from './url/UrlCodec';
 
 interface MenuItem {
   path: string;
@@ -126,6 +128,20 @@ const defaultRoutes: MenuItem[] = [
     name: 'Js Console',
     show: false,
     Component: JsConsole,
+  },
+  {
+    icon: <FontAwesomeIcon icon="file-code" />,
+    path: '/html-entity-encoder',
+    name: 'HTML Entity Encoder',
+    show: false,
+    Component: HtmlEntityCodec,
+  },
+  {
+    icon: <FontAwesomeIcon icon="link" />,
+    path: '/url-encoder',
+    name: 'URL Encoder',
+    show: false,
+    Component: UrlCodec,
   },
 ];
 
