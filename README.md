@@ -13,21 +13,21 @@
 
 ## Tools list
 
-- [x] Unix Timestamp Converter
-- [x] Cron Editor
-- [x] Markdown to HTML Converter
-- [x] HTML Preview
-- [x] QRCode Generator
-- [x] QRCode Reader
-- [x] Base64 Encode / Decode
-- [x] Text Diff
-- [x] JSON Formatter
-- [x] SQL Formatter
-- [x] Regex Tester
-- [x] JWT Debugger
-- [x] Js Console
-- [x] HTML Entity Encode / Decode
-- [x] URL Encode / Decode
+- [x] 1. Unix Timestamp Converter
+- [x] 2. Cron Editor
+- [x] 3. Markdown to HTML Converter
+- [x] 4. HTML Preview
+- [x] 5. QRCode Generator
+- [x] 6. QRCode Reader
+- [x] 7. Base64 Encode / Decode
+- [x] 8. Text Diff
+- [x] 9. JSON Formatter
+- [x] 10. SQL Formatter
+- [x] 11. Regex Tester
+- [x] 12. JWT Debugger
+- [x] 13. Js Console
+- [x] 14. HTML Entity Encode / Decode
+- [x] 15. URL Encode / Decode
 
 ## Demo
 
