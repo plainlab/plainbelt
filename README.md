@@ -1,4 +1,4 @@
-[![Test](https://github.com/plainlab/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainlab/plainbelt/actions/workflows/test.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainlab/plainbelt)
+[![Test](https://github.com/plainlab/plainbelt/actions/workflows/test.yml/badge.svg)](https://github.com/plainlab/plainbelt/actions/workflows/test.yml) [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/plainlab/plainbelt)](https://github.com/plainlab/plainbelt/releases)
 
 # PlainBelt
 
@@ -19,13 +19,15 @@
 - [x] HTML Preview
 - [x] QRCode Generator
 - [x] QRCode Reader
-- [x] Base64 Encode/Decode
+- [x] Base64 Encode / Decode
 - [x] Text Diff
 - [x] JSON Formatter
 - [x] SQL Formatter
 - [x] Regex Tester
 - [x] JWT Debugger
 - [x] Js Console
+- [x] HTML Entity Encode / Decode
+- [x] URL Encode / Decode
 
 ## Demo
 
