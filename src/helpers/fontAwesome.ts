@@ -23,6 +23,8 @@ import {
   faRetweet,
   faSlidersH,
   faCheck,
+  faLink,
+  faFileCode,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -46,5 +48,7 @@ library.add(
   faRetweet,
   faJs,
   faSlidersH,
+  faLink,
+  faFileCode,
   faCheck
 );
