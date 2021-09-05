@@ -26,6 +26,7 @@ import {
   faLink,
   faFileCode,
   faSlash,
+  faRandom,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -52,5 +53,6 @@ library.add(
   faLink,
   faFileCode,
   faSlash,
+  faRandom,
   faCheck
 );
