@@ -172,10 +172,6 @@ const Main = () => {
     setSearch(e.target.value);
   };
 
-  ipcRenderer.on('hotkey-pressed', () => {
-    history.push('/auto', { auto: true });
-  });
-
   useEffect(() => {
     if (search.trim()) {
       setRoutes(
@@ -223,6 +219,10 @@ const Main = () => {
         return null;
       })
       .catch(console.error);
+
+    ipcRenderer.on('hotkey-pressed', () => {
+      history.push('/auto', { auto: true });
+    });
   }, []);
 
   return (
