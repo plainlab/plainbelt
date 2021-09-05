@@ -21,6 +21,7 @@ import CronEditor from './cron/Cron';
 import JsConsole from './notebook/JavaScript';
 import HtmlEntityCodec from './html/HtmlEntityCodec';
 import UrlCodec from './url/UrlCodec';
+import BackSlashCodec from './text/BackSlash';
 
 interface MenuItem {
   path: string;
@@ -142,6 +143,13 @@ const defaultRoutes: MenuItem[] = [
     name: 'URL Encoder',
     show: false,
     Component: UrlCodec,
+  },
+  {
+    icon: <FontAwesomeIcon icon="slash" transform={{ rotate: 42 }} />,
+    path: '/back-slash-encoder',
+    name: 'Backslash Encoder',
+    show: false,
+    Component: BackSlashCodec,
   },
 ];
 

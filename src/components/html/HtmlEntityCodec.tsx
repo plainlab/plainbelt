@@ -5,8 +5,8 @@ import OneToOne from '../common/1-to-1';
 const HtmlEntityCodec = () => {
   return (
     <OneToOne
-      fromDefault='<script>alert("Hello");</script>'
-      fromFunc={escape}
+      defaultInput='<script>alert("Hello");</script>'
+      forwardFunc={escape}
       inverseFunc={unescape}
     />
   );
