@@ -22,6 +22,7 @@ import JsConsole from './notebook/JavaScript';
 import HtmlEntityCodec from './html/HtmlEntityCodec';
 import UrlCodec from './url/UrlCodec';
 import BackSlashCodec from './text/BackSlash';
+import LoremIpsum from './text/LoremIpsum';
 
 interface MenuItem {
   path: string;
@@ -59,6 +60,13 @@ const defaultRoutes: MenuItem[] = [
     name: 'Regex Tester',
     show: true,
     Component: RegexTester,
+  },
+  {
+    icon: <FontAwesomeIcon icon="random" />,
+    path: '/lorem-ipsum',
+    name: 'Lorem Ipsum Generator',
+    show: true,
+    Component: LoremIpsum,
   },
   {
     icon: <FontAwesomeIcon icon={['fab', 'markdown']} />,
