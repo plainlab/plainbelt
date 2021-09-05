@@ -18,8 +18,17 @@ const LoremIpsum = () => {
     setTimeout(() => setCopied(false), 500);
   };
 
-  const unitsList = ['words', 'paragraphs', 'sentences'];
-  const formatList = ['plain', 'html'];
+  const unitsList = ['words', 'sentences', 'paragraphs'];
+  const formatList = [
+    {
+      f: 'html',
+      l: 'HTML',
+    },
+    {
+      f: 'plain',
+      l: 'Text',
+    },
+  ];
 
   useEffect(() => {
     setOutput(loremIpsum({ units, count, format }));
@@ -56,7 +65,7 @@ const LoremIpsum = () => {
         </span>
 
         <span className="flex items-center justify-center space-x-4">
-          {formatList.map((f) => (
+          {formatList.map(({ f, l }) => (
             <label htmlFor={f} className="flex items-center space-x-1" key={f}>
               <input
                 type="radio"
@@ -66,7 +75,7 @@ const LoremIpsum = () => {
                 checked={f === format}
                 onChange={() => setFormat(f as Format)}
               />
-              <p>{f}</p>
+              <p>{l}</p>
             </label>
           ))}
         </span>
