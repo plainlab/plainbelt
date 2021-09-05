@@ -28,6 +28,7 @@
 - [x] 13. Js Console
 - [x] 14. HTML Entity Encode / Decode
 - [x] 15. URL Encode / Decode
+- [x] 16. Backslash Encode / Decode
 
 ## Demo
 

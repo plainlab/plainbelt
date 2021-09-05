@@ -2,21 +2,25 @@ import { clipboard } from 'electron';
 import React, { useState } from 'react';
 
 interface OneToOneProps {
-  fromDefault: string;
-  fromFunc: (f: string) => string;
+  defaultInput: string;
+  forwardFunc: (f: string) => string;
   inverseFunc: (r: string) => string;
 }
 
-const OneToOne = ({ fromDefault, fromFunc, inverseFunc }: OneToOneProps) => {
-  const [from, setFrom] = useState(fromDefault);
-  const [to, setTo] = useState(fromFunc(from));
+const OneToOne = ({
+  defaultInput,
+  forwardFunc,
+  inverseFunc,
+}: OneToOneProps) => {
+  const [from, setFrom] = useState(defaultInput);
+  const [to, setTo] = useState(forwardFunc(from));
 
   const [fromCopied, setFromCopied] = useState(false);
   const [toCopied, setToCopied] = useState(false);
 
   const changeFrom = (value: string) => {
     setFrom(value);
-    setTo(fromFunc(value));
+    setTo(forwardFunc(value));
   };
 
   const changeTo = (value: string) => {
