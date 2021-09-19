@@ -182,6 +182,7 @@
     "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/react-test-renderer": "^16.9.3",
+    "@types/uuid": "^8.3.1",
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
@@ -280,7 +281,8 @@
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.5",
     "source-map-support": "^0.5.19",
-    "sql-formatter": "^4.0.2"
+    "sql-formatter": "^4.0.2",
+    "uuid": "^8.3.2"
   },
   "devEngines": {
     "node": ">=10.x",

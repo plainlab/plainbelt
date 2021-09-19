@@ -1,9 +1,9 @@
 import React, { ComponentType, ReactElement, useEffect, useState } from 'react';
-import { NavLink, Route, useHistory } from 'react-router-dom';
+import { NavLink, Route, useHistory, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Helmet } from 'react-helmet';
-
 import { ipcRenderer } from 'electron';
+import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
 import MarkdownToHtml from './markdown/MarkdownToHtml';
 import UnixTimestamp from './timestamp/UnixTimestamp';
@@ -16,6 +16,7 @@ import JsonFormatter from './json/JsonFormatter';
 import QRCodeReader from './qrcode/QrCodeReader';
 import RegexTester from './regex/RegexTester';
 import JwtDebugger from './jwt/JwtDebugger';
+import CustomScript from './custom-script/CustomScript';
 import Auto from './auto/Auto';
 import CronEditor from './cron/Cron';
 import JsConsole from './notebook/JavaScript';
@@ -166,7 +167,10 @@ const Main = () => {
   const [routes, setRoutes] = useState<MenuItem[]>([]);
   const [search, setSearch] = useState('');
   const [editMenu, setEditMenu] = useState(false);
+  const [activeMenuItemPath, setActiveMenuItemPath] = useState('');
+  const [activeMenuItemName, setActiveMenuItemName] = useState('');
   const history = useHistory();
+  const location = useLocation();
 
   const handleSearch = (e: { target: { value: string } }) => {
     setSearch(e.target.value);
@@ -197,6 +201,10 @@ const Main = () => {
   }, [allRoutes]);
 
   useEffect(() => {
+    setActiveMenuItemPath('');
+  }, [location]);
+
+  useEffect(() => {
     const routeMap: Record<string, boolean> = defaultRoutes.reduce(
       (a, b) => ({ ...a, [b.path]: b.show }),
       {}
@@ -225,6 +233,31 @@ const Main = () => {
     });
   }, []);
 
+  const handleAddNewMenuItem = () => {
+    const id = uuidv4();
+    const routeList = [
+      ...allRoutes,
+      {
+        icon: <FontAwesomeIcon icon="slash" transform={{ rotate: 42 }} />,
+        path: `/custom-script-${id}`,
+        name: `Custom Script ${id.slice(0, 5)}`,
+        show: true,
+        Component: CustomScript,
+      },
+    ];
+    setAllRoutes(routeList);
+  };
+
+  const handleSaveMenuItemEdit = () => {
+    setAllRoutes(
+      allRoutes.map((r) =>
+        r.path === activeMenuItemPath ? { ...r, name: activeMenuItemName } : r
+      )
+    );
+    setActiveMenuItemPath('');
+    setActiveMenuItemName('');
+  };
+
   return (
     <div className="absolute inset-0 flex flex-col overflow-hidden">
       <main className="relative flex flex-1 min-h-0">
@@ -249,7 +282,10 @@ const Main = () => {
             )}
             <FontAwesomeIcon
               icon={editMenu ? 'check' : 'sliders-h'}
-              onClick={() => setEditMenu(!editMenu)}
+              onClick={() => {
+                setEditMenu(!editMenu);
+                if (editMenu) handleSaveMenuItemEdit();
+              }}
               className={classNames({
                 'text-gray-400 cursor-pointer hover:text-gray-600': true,
                 'text-blue-500 hover:text-blue-600': editMenu,
@@ -268,30 +304,88 @@ const Main = () => {
                 key={path}
                 className="flex items-center justify-between space-x-2"
               >
-                <NavLink
-                  to={path}
-                  className="flex items-center justify-start flex-1 px-3 py-1 mb-1 space-x-1 rounded-lg"
-                  activeClassName="bg-blue-400 text-white"
-                >
-                  <span className="w-6">{icon}</span>
-                  {name}
-                </NavLink>
-                {editMenu && (
+                {(activeMenuItemPath === path && (
                   <input
-                    type="checkbox"
-                    checked={show}
-                    onChange={() =>
-                      setAllRoutes(
-                        allRoutes.map((r) =>
-                          r.path === path ? { ...r, show: !show } : r
-                        )
-                      )
-                    }
-                    className="w-4 h-4 rounded cursor-pointer"
+                    className="flex items-center justify-start flex-1 px-3 py-1 mb-1 space-x-1 rounded-lg"
+                    value={activeMenuItemName}
+                    onChange={(evt) => {
+                      setActiveMenuItemName(evt.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSaveMenuItemEdit();
+                      }
+                    }}
                   />
+                )) || (
+                  <NavLink
+                    to={path}
+                    className="flex items-center justify-start flex-1 px-3 py-1 mb-1 space-x-1 rounded-lg"
+                    activeClassName="bg-blue-400 text-white"
+                  >
+                    <span className="w-6">{icon}</span>
+                    {name}
+                  </NavLink>
+                )}
+                {editMenu && (
+                  <>
+                    {location.pathname === path && path.startsWith('/custom-') && (
+                      <>
+                        {(!activeMenuItemPath && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveMenuItemPath(path);
+                              setActiveMenuItemName(name);
+                            }}
+                            className="w-10 btn"
+                          >
+                            edit
+                          </button>
+                        )) || (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setAllRoutes(
+                                allRoutes.filter(
+                                  (r) => r.path !== activeMenuItemPath
+                                )
+                              );
+                              setActiveMenuItemPath('');
+                              setActiveMenuItemName('');
+                            }}
+                            className="w-12 btn text-white bg-red-500"
+                          >
+                            x
+                          </button>
+                        )}
+                      </>
+                    )}
+                    <input
+                      type="checkbox"
+                      checked={show}
+                      onChange={() =>
+                        setAllRoutes(
+                          allRoutes.map((r) =>
+                            r.path === path ? { ...r, show: !show } : r
+                          )
+                        )
+                      }
+                      className="w-4 h-4 rounded cursor-pointer"
+                    />
+                  </>
                 )}
               </section>
             ))}
+            {editMenu && (
+              <button
+                type="button"
+                className="btn"
+                onClick={handleAddNewMenuItem}
+              >
+                + Add your script
+              </button>
+            )}
           </div>
         </nav>
 
