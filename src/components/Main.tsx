@@ -248,6 +248,13 @@ const Main = () => {
     setAllRoutes(routeList);
   };
 
+  const handleDeleteMenuItem = (path: MenuItem['path']) => {
+    setAllRoutes(allRoutes.filter((r) => r.path !== activeMenuItemPath));
+    setActiveMenuItemPath('');
+    setActiveMenuItemName('');
+    ipcRenderer.invoke('delete-store', path);
+  };
+
   const handleSaveMenuItemEdit = () => {
     setAllRoutes(
       allRoutes.map((r) =>
@@ -345,15 +352,7 @@ const Main = () => {
                         )) || (
                           <button
                             type="button"
-                            onClick={() => {
-                              setAllRoutes(
-                                allRoutes.filter(
-                                  (r) => r.path !== activeMenuItemPath
-                                )
-                              );
-                              setActiveMenuItemPath('');
-                              setActiveMenuItemName('');
-                            }}
+                            onClick={() => handleDeleteMenuItem(path)}
                             className="w-12 btn text-white bg-red-500"
                           >
                             x

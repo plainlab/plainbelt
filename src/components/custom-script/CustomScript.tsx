@@ -8,8 +8,7 @@ require('codemirror/mode/javascript/javascript');
 
 const defaultFunc = `function(x) {
   return x;
-}
-`;
+}`;
 
 const CustomScript = () => {
   const [customFunc, setCustomFunc] = useState(defaultFunc);
@@ -75,7 +74,7 @@ const CustomScript = () => {
       // eslint-disable-next-line no-alert
       alert(e.message);
     }
-  }, [customFunc, input]);
+  }, [customFunc, input, location.pathname]);
 
   useEffect(() => {
     handleSave();
