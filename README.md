@@ -72,6 +72,11 @@ yarn package
 
 Checkout the `release` folder and enjoy!
 
+
+## Got a dollar or two?
+
+Buy it: https://gum.co/plainbelt
+
 ---
 
 &copy; 2021 PlainLab
