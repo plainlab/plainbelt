@@ -226,6 +226,10 @@ ipcMain.handle('set-store', async (_event, { key, value }) => {
   return store.set(key, value);
 });
 
+ipcMain.handle('delete-store', async (_event, { key }) => {
+  return store.delete(key);
+});
+
 /**
  * Add event listeners...
  */
